@@ -43,19 +43,19 @@ $$
 which gives the point of surface interaction of a ray defined by $\mathbf{x}$ and $\vec{\omega}$. Besides we know that the incident ray at one point is the outgoing ray of the previous interaction point. Thus 
 
 $$
-L_{i}(\mathbf{x},\vec{\omega}) = L_{o}(r(\mathbf{x},\vec{\omega}), -\vec{\omega})
+L\_{i}(\mathbf{x},\vec{\omega}) = L\_{o}(r(\mathbf{x},\vec{\omega}), -\vec{\omega})
 $$
 
 The rendering equation thus becomes recursive
 
 $$
-L_{o}(\mathbf{x}, \vec{\omega})=L_e(\mathbf{x}, \vec{\omega})+\int_{H^2} f_r\left(\mathbf{x}, \vec{\omega}^{\prime}, \vec{\omega}\right) L_{o}\left(r\left(\mathbf{x}, \vec{\omega}^{\prime}\right),-\vec{\omega}^{\prime}\right) \cos \theta^{\prime} d \vec{\omega}^{\prime}
+L\_{o}(\mathbf{x}, \vec{\omega})=L_e(\mathbf{x}, \vec{\omega})+\int\_{H^2} f_r\left(\mathbf{x}, \vec{\omega}^{\prime}, \vec{\omega}\right) L\_{o}\left(r\left(\mathbf{x}, \vec{\omega}^{\prime}\right),-\vec{\omega}^{\prime}\right) \cos \theta^{\prime} d \vec{\omega}^{\prime}
 $$
 
 since there are only outgoing functions on both sides, we could drop the "$o$" subscript.
 
 $$
-L(\mathbf{x}, \vec{\omega})=L_e(\mathbf{x}, \vec{\omega})+\int_{H^2} f_r\left(\mathbf{x}, \vec{\omega}^{\prime}, \vec{\omega}\right) L\left(r\left(\mathbf{x}, \vec{\omega}^{\prime}\right),-\vec{\omega}^{\prime}\right) \cos \theta^{\prime} d \vec{\omega}^{\prime}
+L(\mathbf{x}, \vec{\omega})=L_e(\mathbf{x}, \vec{\omega})+\int\_{H^2} f_r\left(\mathbf{x}, \vec{\omega}^{\prime}, \vec{\omega}\right) L\left(r\left(\mathbf{x}, \vec{\omega}^{\prime}\right),-\vec{\omega}^{\prime}\right) \cos \theta^{\prime} d \vec{\omega}^{\prime}
 $$
 
 ## Solving the Rendering Equation
@@ -63,13 +63,13 @@ $$
 ![600](attachments/Global%20Illumination-1.png)
 
 $$
-L(\mathbf{x}, \vec{\omega}) \approx L_e(\mathbf{x}, \vec{\omega})+\frac{1}{N} \sum_{i=1}^N \frac{f_r\left(\mathbf{x}, \vec{\omega}^{\prime}, \vec{\omega}\right) L\left(r\left(\mathbf{x}, \vec{\omega}^{\prime}\right),-\vec{\omega}^{\prime}\right) \cos \theta^{\prime}}{p\left(\vec{\omega}^{\prime}\right)}
+L(\mathbf{x}, \vec{\omega}) \approx L_e(\mathbf{x}, \vec{\omega})+\frac{1}{N} \sum\_{i=1}^N \frac{f_r\left(\mathbf{x}, \vec{\omega}^{\prime}, \vec{\omega}\right) L\left(r\left(\mathbf{x}, \vec{\omega}^{\prime}\right),-\vec{\omega}^{\prime}\right) \cos \theta^{\prime}}{p\left(\vec{\omega}^{\prime}\right)}
 $$
 
 Recursively calling [Monte Carlo Integration](Monte%20Carlo%20Integration.md) will work but is not efficient. We could partition the integrand to make a better approximation. One way is to estimate direct illumination separately from indirect illumination, then add the two:
 
 $$
-L(\mathbf{x},\vec{\omega}) = L_{e}(\mathbf{x},\vec{\omega}) + L_{d}(\mathbf{x}, \vec{\omega}) + L_{i}(\mathbf{x}, \vec{\omega})
+L(\mathbf{x},\vec{\omega}) = L\_{e}(\mathbf{x},\vec{\omega}) + L\_{d}(\mathbf{x}, \vec{\omega}) + L\_{i}(\mathbf{x}, \vec{\omega})
 $$
 
 ![Global Illumination-2](attachments/Global%20Illumination-2.png)
@@ -173,10 +173,10 @@ Path Tracing have problems handling caustics because it's difficult to importanc
 The total radiance contributing to pixel $j$ is 
 
 $$
-I_j=\int_{A_{\mathrm{film}}} \int_{H^2} W_e(\mathbf{x}, \vec{\omega}) L_i(\mathbf{x}, \vec{\omega}) \cos \theta d \vec{\omega} d \mathbf{x}
+I_j=\int\_{A\_{\mathrm{film}}} \int\_{H^2} W_e(\mathbf{x}, \vec{\omega}) L_i(\mathbf{x}, \vec{\omega}) \cos \theta d \vec{\omega} d \mathbf{x}
 $$
 
-where $W_{e}(\mathbf{x},\vec{\omega})$ is the response of the sensor at film location $\mathbf{x}$ to radiance arriving from direction $\vec{\omega}$, which is often referred to as *emitted importance*. 
+where $W\_{e}(\mathbf{x},\vec{\omega})$ is the response of the sensor at film location $\mathbf{x}$ to radiance arriving from direction $\vec{\omega}$, which is often referred to as *emitted importance*. 
 
 ### Radiance & Importance Duality
 **Radiance**:
@@ -189,19 +189,19 @@ where $W_{e}(\mathbf{x},\vec{\omega})$ is the response of the sensor at film loc
 
 $$
 \begin{aligned}
-I_j &=\int_{A_{\mathrm{film}}} \int_{H^2} W_e(\mathbf{x}, \vec{\omega}) L_i(\mathbf{x}, \vec{\omega}) \cos \theta d \vec{\omega} d \mathbf{x} \\
-&=\int_{A_{\mathrm{film}}} \int_A W_e(\mathbf{x}, \mathbf{y}) G(\mathbf{x}, \mathbf{y}) L_o(\mathbf{y}, \mathbf{x}) d \mathbf{y} d \mathbf{x} \\
-&=\int_{A_{\mathrm{film}}} \int_A \int_{A_{\mathrm{light}}} W_e(\mathbf{x}, \mathbf{y}) G(\mathbf{x}, \mathbf{y}) f(\mathbf{y}, \mathbf{z}, \mathbf{x}) G(\mathbf{y}, \mathbf{z}) L_e(\mathbf{z}, \mathbf{y}) d \mathbf{z} d \mathbf{y} d \mathbf{x} \\
-&=\int_{A_{\mathrm{light}}} \int_A \int_{A_{\mathrm{film}}} W_e(\mathbf{x}, \mathbf{y}) \underbrace{ G(\mathbf{y}, \mathbf{x}) f(\mathbf{y}, \mathbf{x}, \mathbf{z}) G(\mathbf{z}, \mathbf{y}) }_{ \text{symemetric functions} } L_e(\mathbf{z}, \mathbf{y}) d \mathbf{x} d \mathbf{y} d \mathbf{z} \\
-&=\int_{A_{\mathrm{light}}} \int_A W_o(\mathbf{y}, \mathbf{z}) G(\mathbf{z}, \mathbf{y}) L_e(\mathbf{z}, \mathbf{y}) d \mathbf{y} d \mathbf{z} \\
-&=\int_{A_{\mathrm{light}}} \int_{H^2} W_i(\mathbf{z}, \vec{\omega}) L_e(\mathbf{z}, \vec{\omega}) \cos \theta d \vec{\omega} d \mathbf{z}
+I_j &=\int\_{A\_{\mathrm{film}}} \int\_{H^2} W_e(\mathbf{x}, \vec{\omega}) L_i(\mathbf{x}, \vec{\omega}) \cos \theta d \vec{\omega} d \mathbf{x} \\
+&=\int\_{A\_{\mathrm{film}}} \int_A W_e(\mathbf{x}, \mathbf{y}) G(\mathbf{x}, \mathbf{y}) L_o(\mathbf{y}, \mathbf{x}) d \mathbf{y} d \mathbf{x} \\
+&=\int\_{A\_{\mathrm{film}}} \int_A \int\_{A\_{\mathrm{light}}} W_e(\mathbf{x}, \mathbf{y}) G(\mathbf{x}, \mathbf{y}) f(\mathbf{y}, \mathbf{z}, \mathbf{x}) G(\mathbf{y}, \mathbf{z}) L_e(\mathbf{z}, \mathbf{y}) d \mathbf{z} d \mathbf{y} d \mathbf{x} \\
+&=\int\_{A\_{\mathrm{light}}} \int_A \int\_{A\_{\mathrm{film}}} W_e(\mathbf{x}, \mathbf{y}) \underbrace{ G(\mathbf{y}, \mathbf{x}) f(\mathbf{y}, \mathbf{x}, \mathbf{z}) G(\mathbf{z}, \mathbf{y}) }\_{ \text{symemetric functions} } L_e(\mathbf{z}, \mathbf{y}) d \mathbf{x} d \mathbf{y} d \mathbf{z} \\
+&=\int\_{A\_{\mathrm{light}}} \int_A W_o(\mathbf{y}, \mathbf{z}) G(\mathbf{z}, \mathbf{y}) L_e(\mathbf{z}, \mathbf{y}) d \mathbf{y} d \mathbf{z} \\
+&=\int\_{A\_{\mathrm{light}}} \int\_{H^2} W_i(\mathbf{z}, \vec{\omega}) L_e(\mathbf{z}, \vec{\omega}) \cos \theta d \vec{\omega} d \mathbf{z}
 \end{aligned}
 $$
 
 By defining 
 
 $$
-W_{o}(\mathbf{y},\mathbf{z}) = W_{e}(\mathbf{x},\mathbf{y}) G(\mathbf{y},\mathbf{x})f(\mathbf{y},\mathbf{z},\mathbf{x})
+W\_{o}(\mathbf{y},\mathbf{z}) = W\_{e}(\mathbf{x},\mathbf{y}) G(\mathbf{y},\mathbf{x})f(\mathbf{y},\mathbf{z},\mathbf{x})
 $$
 
 we have the duality of radiance and importance. In summary, 
@@ -209,8 +209,8 @@ we have the duality of radiance and importance. In summary,
 $$
 \large
 \begin{aligned}
-I_j &=\overbrace{\int_{A_{\mathrm{film}}}  \int_{H^2} \overbrace{ W_e(\mathbf{x}, \vec{\omega}) }^{ \text{emitted importance} } \overbrace{ L_i(\mathbf{x}, \vec{\omega}) }^{ \text{ incident radiance} } \cos \theta d \vec{\omega} d \mathbf{x} }^{ \text{Path tracing} } \\
-&=\underbrace{ \int_{A_{\mathrm{light}}} \int_{H^2} \underbrace{ W_i(\mathbf{z}, \vec{\omega}) }_{ \text{incident importance} } \underbrace{ L_e(\mathbf{z}, \vec{\omega}) }_{ \text{ emitted radiance} } \cos \theta d \vec{\omega} d \mathbf{z} }_{ \text{Light tracing} }
+I_j &=\overbrace{\int\_{A\_{\mathrm{film}}}  \int\_{H^2} \overbrace{ W_e(\mathbf{x}, \vec{\omega}) }^{ \text{emitted importance} } \overbrace{ L_i(\mathbf{x}, \vec{\omega}) }^{ \text{ incident radiance} } \cos \theta d \vec{\omega} d \mathbf{x} }^{ \text{Path tracing} } \\
+&=\underbrace{ \int\_{A\_{\mathrm{light}}} \int\_{H^2} \underbrace{ W_i(\mathbf{z}, \vec{\omega}) }\_{ \text{incident importance} } \underbrace{ L_e(\mathbf{z}, \vec{\omega}) }\_{ \text{ emitted radiance} } \cos \theta d \vec{\omega} d \mathbf{z} }\_{ \text{Light tracing} }
 \end{aligned}
 $$
 
@@ -233,9 +233,9 @@ If we write explicitly the rendering equation without the recursive term, it wou
 $$
 \begin{aligned}
 I_j &=\int_A \int_A W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) G\left(\mathbf{x}_0, \mathbf{x}_1\right) L_o\left(\mathbf{x}_1, \mathbf{x}_0\right) d \mathbf{x}_1 d \mathbf{x}_0 \\
-&=\underbrace{ \iint_A W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_1, \mathbf{x}_0\right) G\left(\mathbf{x}_0, \mathbf{x}_1\right) d \mathbf{x}_1 d \mathbf{x}_0 }_{ \text{Emission: } LE } \\
-&+\underbrace{ \iiint_A W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_2, \mathbf{x}_1\right) G\left(\mathbf{x}_0, \mathbf{x}_1\right) f\left(\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_0\right) G\left(\mathbf{x}_1, \mathbf{x}_2\right) d \mathbf{x}_2 d \mathbf{x}_1 d \mathbf{x}_0+\cdots  }_{ \text{Direct illumination(3 vertices): } L(D|S)E }\\
-&+\underbrace{ \int \cdots \int_A W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_k, \mathbf{x}_{k-1}\right) G\left(\mathbf{x}_0, \mathbf{x}_1\right) \prod_{j=1}^{k-1} f\left(\mathbf{x}_j, \mathbf{x}_{j+1}, \mathbf{x}_{j-1}\right) G\left(\mathbf{x}_j, \mathbf{x}_{j+1}\right) d \mathbf{x}_k \cdots d \mathbf{x}_0+\cdots }_{(k-1) \text {-bounce illumination }(k+1 \text { vertices })  }
+&=\underbrace{ \iint_A W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_1, \mathbf{x}_0\right) G\left(\mathbf{x}_0, \mathbf{x}_1\right) d \mathbf{x}_1 d \mathbf{x}_0 }\_{ \text{Emission: } LE } \\
+&+\underbrace{ \iiint_A W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_2, \mathbf{x}_1\right) G\left(\mathbf{x}_0, \mathbf{x}_1\right) f\left(\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_0\right) G\left(\mathbf{x}_1, \mathbf{x}_2\right) d \mathbf{x}_2 d \mathbf{x}_1 d \mathbf{x}_0+\cdots  }\_{ \text{Direct illumination(3 vertices): } L(D|S)E }\\
+&+\underbrace{ \int \cdots \int_A W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_k, \mathbf{x}\_{k-1}\right) G\left(\mathbf{x}_0, \mathbf{x}_1\right) \prod\_{j=1}^{k-1} f\left(\mathbf{x}_j, \mathbf{x}\_{j+1}, \mathbf{x}\_{j-1}\right) G\left(\mathbf{x}_j, \mathbf{x}\_{j+1}\right) d \mathbf{x}_k \cdots d \mathbf{x}_0+\cdots }\_{(k-1) \text {-bounce illumination }(k+1 \text { vertices })  }
 \end{aligned}
 $$
 
@@ -244,21 +244,21 @@ Define
 
 
 $$
-\mathcal{P}_{k} = \{ \overline{\mathbf{x}} = \mathbf{x}_{0},\dots ,\mathbf{x}_{k}; \mathbf{x}_{0}, \dots, \mathbf{x}_{k} \in A \}
+\mathcal{P}\_{k} = \{ \overline{\mathbf{x}} = \mathbf{x}\_{0},\dots ,\mathbf{x}\_{k}; \mathbf{x}\_{0}, \dots, \mathbf{x}\_{k} \in A \}
 $$
 
-- the throughput of path $\overline{\mathbf{x}}_{k}$
+- the throughput of path $\overline{\mathbf{x}}\_{k}$
 
 
 $$
-T(\overline{\mathbf{x}}) = G(\mathbf{x}_{0},\mathbf{x}_{1}) \prod_{j=1}^{k-1} f(\mathbf{x}_{j},\mathbf{x}_{j+1},\mathbf{x}_{j-1})G(\mathbf{x}_{j},\mathbf{x}_{j+1})
+T(\overline{\mathbf{x}}) = G(\mathbf{x}\_{0},\mathbf{x}\_{1}) \prod\_{j=1}^{k-1} f(\mathbf{x}\_{j},\mathbf{x}\_{j+1},\mathbf{x}\_{j-1})G(\mathbf{x}\_{j},\mathbf{x}\_{j+1})
 $$
 
 - the path space, i.e. the space of all paths of all lengths
 
 
 $$
-\mathcal{P} = \cup_{k=1}^{\infty} \mathcal{P}_{k}
+\mathcal{P} = \cup\_{k=1}^{\infty} \mathcal{P}\_{k}
 $$
 
 Then the rendering equation becomes 
@@ -266,16 +266,16 @@ Then the rendering equation becomes
 $$
 \begin{aligned}
 I_j &=\int_A \int_A W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) G\left(\mathbf{x}_0, \mathbf{x}_1\right) L_o\left(\mathbf{x}_1, \mathbf{x}_0\right) d \mathbf{x}_1 d \mathbf{x}_0 \\
-&=\int_{\mathcal{P}_1} W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_1, \mathbf{x}_0\right) T\left(\overline{\mathbf{x}}_1\right) d \overline{\mathbf{x}}_1 \\
-&+\int_{\mathcal{P}_2} W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_2, \mathbf{x}_1\right) T\left(\overline{\mathbf{x}}_2\right) d \overline{\mathbf{x}}_2+\cdots \\
-&+\int_{\mathcal{P}_k} W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_k, \mathbf{x}_{k-1}\right) T\left(\overline{\mathbf{x}}_k\right) d \overline{\mathbf{x}}_k+\cdots
+&=\int\_{\mathcal{P}_1} W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_1, \mathbf{x}_0\right) T\left(\overline{\mathbf{x}}_1\right) d \overline{\mathbf{x}}_1 \\
+&+\int\_{\mathcal{P}_2} W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_2, \mathbf{x}_1\right) T\left(\overline{\mathbf{x}}_2\right) d \overline{\mathbf{x}}_2+\cdots \\
+&+\int\_{\mathcal{P}_k} W_e\left(\mathbf{x}_0, \mathbf{x}_1\right) L_e\left(\mathbf{x}_k, \mathbf{x}\_{k-1}\right) T\left(\overline{\mathbf{x}}_k\right) d \overline{\mathbf{x}}_k+\cdots
 \end{aligned}
 $$
 
 which gives some kind of uniform expression
 
 $$
-I_{j} = \underbrace{ \int _{\mathcal{P}} W_{e}(\mathbf{x}_{0},\mathbf{x}_{1}) L_{e}(\mathbf{x}_{k},\mathbf{x}_{k-1})T(\overline{\mathbf{x}}) \, d \overline{\mathbf{x}}  }_{ \text{global ilumination(all paths of all lengths)} }
+I\_{j} = \underbrace{ \int \_{\mathcal{P}} W\_{e}(\mathbf{x}\_{0},\mathbf{x}\_{1}) L\_{e}(\mathbf{x}\_{k},\mathbf{x}\_{k-1})T(\overline{\mathbf{x}}) \, d \overline{\mathbf{x}}  }\_{ \text{global ilumination(all paths of all lengths)} }
 $$
 
 ![Global Illumination-8](attachments/Global%20Illumination-8.png)
@@ -285,19 +285,19 @@ $$
 The integral is evaluated by Monte Carlo estimator
 
 $$
-I_j \approx \frac{1}{N} \sum_{i=1}^N \frac{W_e\left(\mathbf{x}_{i, 0}, \mathbf{x}_{i, 1}\right) L_e\left(\mathbf{x}_{i, k}, \mathbf{x}_{i, k-1}\right) T\left(\overline{\mathbf{x}}_i\right)}{p\left(\overline{\mathbf{x}}_i\right)}
+I_j \approx \frac{1}{N} \sum\_{i=1}^N \frac{W_e\left(\mathbf{x}\_{i, 0}, \mathbf{x}\_{i, 1}\right) L_e\left(\mathbf{x}\_{i, k}, \mathbf{x}\_{i, k-1}\right) T\left(\overline{\mathbf{x}}_i\right)}{p\left(\overline{\mathbf{x}}_i\right)}
 $$
 
-where $p(\overline{\mathbf{x}}) = p(\mathbf{x}_{0},\dots,\mathbf{x}_{k})$ is the joint PDF of path vertices.
+where $p(\overline{\mathbf{x}}) = p(\mathbf{x}\_{0},\dots,\mathbf{x}\_{k})$ is the joint PDF of path vertices.
 
 Still, the process could be more efficient with NEE(next event estimation)
 
 | Tracing type           | Example                         | Path pdf                                                                                                                                                                                            |
 | ---------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Path tracing           | ![Global Illumination-10](attachments/Global%20Illumination-10.png) | $p(\overline{\mathbf{x}})=p(\mathbf{x}_{0})p(\mathbf{x}_{1} \mid \mathbf{x}_{0})p(\mathbf{x}_{2} \mid \mathbf{x}_{0}\mathbf{x}_{1})p(\mathbf{x}_{3}\mid\mathbf{x}_{0}\mathbf{x}_{1}\mathbf{x}_{2})$ |
-| Path tracing with NEE  | ![Global Illumination-11](attachments/Global%20Illumination-11.png) | $p(\overline{\mathbf{x}})=p(\mathbf{x}_{0})p(\mathbf{x}_{1} \mid \mathbf{x}_{0})p(\mathbf{x}_{2} \mid \mathbf{x}_{0}\mathbf{x}_{1})p(\mathbf{x}_{3})$                                               |
-| Light tracing          | ![Global Illumination-12](attachments/Global%20Illumination-12.png) | $p(\overline{\mathbf{x}})=p(\mathbf{x}_{0}\mid\mathbf{x}_{3}\mathbf{x}_{2}\mathbf{x}_{1})p(\mathbf{x}_{1} \mid \mathbf{x}_{3}\mathbf{x}_{2})p(\mathbf{x}_{2} \mid \mathbf{x}_{3})p(\mathbf{x}_{3})$ |
-| Light tracing with NEE | ![Global Illumination-13](attachments/Global%20Illumination-13.png) | $p(\overline{\mathbf{x}})=p(\mathbf{x}_{0})p(\mathbf{x}_{1} \mid \mathbf{x}_{3}\mathbf{x}_{2})p(\mathbf{x}_{2} \mid \mathbf{x}_{3})p(\mathbf{x}_{3})$                                               |
+| Path tracing           | ![Global Illumination-10](attachments/Global%20Illumination-10.png) | $p(\overline{\mathbf{x}})=p(\mathbf{x}\_{0})p(\mathbf{x}\_{1} \mid \mathbf{x}\_{0})p(\mathbf{x}\_{2} \mid \mathbf{x}\_{0}\mathbf{x}\_{1})p(\mathbf{x}\_{3}\mid\mathbf{x}\_{0}\mathbf{x}\_{1}\mathbf{x}\_{2})$ |
+| Path tracing with NEE  | ![Global Illumination-11](attachments/Global%20Illumination-11.png) | $p(\overline{\mathbf{x}})=p(\mathbf{x}\_{0})p(\mathbf{x}\_{1} \mid \mathbf{x}\_{0})p(\mathbf{x}\_{2} \mid \mathbf{x}\_{0}\mathbf{x}\_{1})p(\mathbf{x}\_{3})$                                               |
+| Light tracing          | ![Global Illumination-12](attachments/Global%20Illumination-12.png) | $p(\overline{\mathbf{x}})=p(\mathbf{x}\_{0}\mid\mathbf{x}\_{3}\mathbf{x}\_{2}\mathbf{x}\_{1})p(\mathbf{x}\_{1} \mid \mathbf{x}\_{3}\mathbf{x}\_{2})p(\mathbf{x}\_{2} \mid \mathbf{x}\_{3})p(\mathbf{x}\_{3})$ |
+| Light tracing with NEE | ![Global Illumination-13](attachments/Global%20Illumination-13.png) | $p(\overline{\mathbf{x}})=p(\mathbf{x}\_{0})p(\mathbf{x}\_{1} \mid \mathbf{x}\_{3}\mathbf{x}\_{2})p(\mathbf{x}\_{2} \mid \mathbf{x}\_{3})p(\mathbf{x}\_{3})$                                               |
 
 ## Bidirectional Path Tracing
 We could combine light tracing and path tracing using bidirectional path tracing
