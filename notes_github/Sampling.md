@@ -76,6 +76,7 @@ v /= v.length();
 
 **Example**:
 Sample with pdf 
+
 $$
 \begin{align}
 p(y) & = 2y, \quad y\in[0,1] \\
@@ -83,19 +84,27 @@ P(y) & = y^{2}  \\
 P^{-1}(\xi) & = \sqrt{ \xi } 
 \end{align}
 $$
+
 Thus when we sample from a uniform distribution from a uniform distribution $\xi \sim \text{uniform(0,1)}$, we get the corresponding sample $y_{i} = \sqrt{ \xi_{i} }$.
 
 ### Sampling 2D Distributions
 Draw samples $(X,Y)$ from a 2D distribution $p(x,y)$:
 - If $p(x,y)$ is separable, i.e., $p(x,y)=p_{x}(x)p_{y}(y)$, we can independently sample $p_{x}(x)$ and $p_{y}(y)$.
 - Otherwise, compute the marginal density function: 
-	$$
-	p(x) = \int p(x,y) \, dy
-	$$
+
+
+$$
+p(x) = \int p(x,y) \, dy
+$$
+
 - and the conditional density:
-  $$
+
+
+$$
 p(y|x) = \frac{p(x,y)}{p(x)}
 $$
+
+
 - Procedure: first sample $X_{i}\sim p(x)$, then sample $Y_{i}\sim p(y|x=X_{i})$.
 
 ### Area-preserving Sampling
@@ -231,7 +240,7 @@ F_{2}(\Theta) & = 1 - e^{ -\tan ^{2}\Theta / \alpha^{2} }
 $$
 
 which means we can sample $\phi, \theta$ independently. Inverse the function we have
- 
+
 $$
 \begin{align}
 \phi & = 2\pi \xi_{1} \\
