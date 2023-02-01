@@ -170,14 +170,14 @@ $$
 
 $$t_{x_{1}} = \frac{x_{min}-\mathbf{o}_{x}}{\mathbf{d}_{x}}, \quad t_{x_{2}} = \frac{x_{max}-\mathbf{o}_{x}}{\mathbf{d}_{x}}$$
 
-1. If $t_{x_{1}}>t_{x_{2}}$, swap $t_{x_{1}}$ and $t_{x_{2}}$ 
+2. If $t_{x_{1}}>t_{x_{2}}$, swap $t_{x_{1}}$ and $t_{x_{2}}$ 
 
 
-1. Repeat for $t_{y_{1}}$, $t_{y_{2}}$, $t_{z_{1}}$, $t_{z_{2}}$.
+3. Repeat for $t_{y_{1}}$, $t_{y_{2}}$, $t_{z_{1}}$, $t_{z_{2}}$.
 
 
-1. Set $t_{min}$ and $t_{max}$ 
+4. Set $t_{min}$ and $t_{max}$ 
 
 $$\begin{align}t_{min}  & = \max(t_{x_{1}},t_{y_{1}}, t_{z_{1}}) \\ t_{max} & = \min(t_{x_{2}},t_{y_{2}},t_{z_{2}})\end{align}$$
 
-1. Hit if $t_{min} \le t_{max}$
+5. Hit if $t_{min} \le t_{max}$
