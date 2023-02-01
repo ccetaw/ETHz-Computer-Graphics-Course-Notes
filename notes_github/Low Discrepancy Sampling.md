@@ -247,7 +247,7 @@ $(0,2)$-sequence uses the first two dimensions of a low-discrepancy sequence der
 In general, any sequence of length $2^{l_{1}+l_{2}}$ (where $l_{i}$ is a nonnegative integer) from a $(0,2)$-sequence satisfies the general stratification constraint: ==one element in one *elementary intervals*==. The set of elementary intervals in two dimensions, base $2$, is defined as 
 
 $$
-E = \left\{  \left[  \frac{a_{1}}{2^{l_{1}}}, \frac{a_{1}+1}{2l_{1}} \right)\times \left[ \frac{a_{2}}{2^{l_{2}}}, \frac{a_{2}+1}{2^{l_{2}}} \right)  \right\}
+E = \left(  \left[  \frac{a_{1}}{2^{l_{1}}}, \frac{a_{1}+1}{2l_{1}} \right)\times \left[ \frac{a_{2}}{2^{l_{2}}}, \frac{a_{2}+1}{2^{l_{2}}} \right)  \right)
 $$
 
 where the integer $a_{i} = 0,1,2,4\dots,2^{l_{i}}-1$ and $l_{1}$ and $l_{2}$ are variables.

@@ -15,9 +15,11 @@ Many surfaces are not perfectly smooth. We need an empirical model to account fo
 ![500](attachments/MFT_3.png)
 
 Normalized exponentiated cosine lobe
+
 $$
 f_{r}(\boldsymbol{\omega}_{o}, \boldsymbol{\omega}_{i}) = \frac{e+2}{2\pi}(\boldsymbol{\omega}_{r} \cdot \boldsymbol{\omega}_{o})^{e}
 $$
+
 where $\boldsymbol{\omega}_{r} = (2\mathbf{n}(\mathbf{n}\cdot \boldsymbol{\omega}_{i})-\boldsymbol{\omega}_{i})$.
 
 - Blur the reflection rays in a cone about the mirror direction
@@ -25,10 +27,13 @@ where $\boldsymbol{\omega}_{r} = (2\mathbf{n}(\mathbf{n}\cdot \boldsymbol{\omega
 
 ## Blinn-Phong
 Blur in normal domain instead of the reflection directions
+
 $$
 f_{r}(\boldsymbol{\omega}_{o}, \boldsymbol{\omega}_{i}) = \frac{e+2}{2\pi}(\boldsymbol{\omega}_{h}\cdot \mathbf{n})^{e}
 $$
+
 where $\boldsymbol{\omega}_{h}$ is the half-way vector
+
 $$
 \boldsymbol{\omega}_{h} = \frac{\boldsymbol{\omega}_{i}+\boldsymbol{\omega}_{o}}{\|\boldsymbol{\omega}_{i} + \boldsymbol{\omega}_{o}\|}
 $$
@@ -53,16 +58,19 @@ Assumptions:
 $$
 f(\boldsymbol{\omega}_{i}, \boldsymbol{\omega}_{o}) = \frac{\overbrace{ F(\boldsymbol{\omega}_{h}, \boldsymbol{\omega}_{o}) }^{ \text{Fresnel coefficient} } \cdot \overbrace{ D(\boldsymbol{\omega}_{h}) }^{ \text{Microfacet distribution} } \cdot \overbrace{ G(\boldsymbol{\omega}_{i}, \boldsymbol{\omega}_{o}) }^{ \text{Shadowing/masking} }}{\underbrace{ 4|(\boldsymbol{\omega}_{i} \cdot \mathbf{n})(\boldsymbol{\omega}_{o} \cdot \mathbf{n})| }_{ \text{Energy conservation} }}
 $$
+
 where $\boldsymbol{\omega}_{h}$ is the halfway vector as in [](.md#Blinn-Phong%7CBlinn-Phong%20model).  
 
 ### Microfacet Distribution
 Probability density function over projected solid angle, which must be normalized:
+
 $$
 \int _{H^{2}} D(\vec{\omega}_{h})\cos\theta_{h} \, d\vec{\omega} _{h}
 $$
 
 #### The Beckmann Distribution
 The Beckmann distribution assumes that the slopes follow a Gaussian distribution.
+
 $$
 \large
 D(\boldsymbol{\omega}_{h}) = \frac{1}{\pi\alpha^{2}\cos ^{4}\theta_{h}} e^{ - \tan ^{2} \theta_{h}/\alpha^{2} }
@@ -72,6 +80,7 @@ $$
 where $\alpha$ is the roughness parameter or diffuse parameter.
 
 #### Blinn Distribution
+
 $$
 D(\vec{\omega}_{h}) = \frac{e+2}{2\pi}(\vec{\omega}_{h}\cdot \vec{n})^{e}
 $$
@@ -87,14 +96,19 @@ Microfacets can be shadowed and/or masked by other microfacets
 Each microfacet distribution typically has its respective shadowing and masking term. 
 
 Beckmann distribution uses
+
 $$
 G(\vec{\omega}) = \frac{2}{1+\text{erf}(s)+\frac{1}{s \sqrt{ \pi }}e^{ -s^{2} }}
 $$
+
 where 
+
 $$
 s = \frac{1}{\alpha \tan\theta}
 $$
+
 or in approximated version
+
 $$
 G(\vec{\omega}) \simeq 
 \begin{cases}
@@ -102,12 +116,15 @@ G(\vec{\omega}) \simeq
 1,  & \quad \text{otherwise}
 \end{cases}
 $$
+
 and 
+
 $$
 G(\vec{\omega}_{i}, \vec{\omega}_{o}) = G(\vec{\omega}_{i}) \cdot G(\vec{\omega}_{o})
 $$
 
 Blinn Distribution uses
+
 $$
 G\left(\vec{\omega}_i, \vec{\omega}_o\right)=\min \left(1, \frac{2\left(\overrightarrow{n} \cdot \vec{\omega}_h\right)\left(\overrightarrow{n} \cdot \vec{\omega}_i\right)}{\left(\vec{\omega}_h \cdot \vec{\omega}_i\right)}, \frac{2\left(\overrightarrow{n} \cdot \vec{\omega}_h\right)\left(\overrightarrow{n} \cdot \vec{\omega}_o\right)}{\left(\vec{\omega}_h \cdot \vec{\omega}_o\right)}\right)
 $$
@@ -117,6 +134,7 @@ $$
 $$
 f\left(\vec{\omega}_i, \vec{\omega}_o\right)=\frac{F\left(\vec{\omega}_h, \vec{\omega}_o\right) \cdot D\left(\vec{\omega}_h\right) \cdot G\left(\vec{\omega}_i, \vec{\omega}_o\right)}{4\left|\left(\vec{\omega}_i \cdot \overrightarrow{\mathbf{n}}\right)\left(\vec{\omega}_o \cdot \overrightarrow{\mathbf{n}}\right)\right|}
 $$
+
 Note that the BRDF function is relevant with the half-way vector $\vec{\omega}_{h}$. We need to sample this vector to determine the BRDF function value. The general recipe is 
 - randomly generate a $\vec{\omega}_{h}$ with PDF proportional to $D$
 - reflect incident direction $\vec{\omega}_{i}$ about $\vec{\omega}_{h}$ to obtain $\vec{\omega}_{o}$
