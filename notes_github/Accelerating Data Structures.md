@@ -8,7 +8,7 @@ date: 26/01/2023
 
 In ray tracing, we need to determine weather a ray intersects with an object. Naively by brute force this is done by 
 1. Intersect ray with every primitive
-2. Take closest intersection
+2. Take closest intersection   
 ![](attachments/Accelerating%20Data%20Structures-3.png#center%7CBrute-force%20intersection%20detection%7C400)
 The brute-force method is extremely inefficient. We need more advanced techniques to make intersection detection more efficient, either by preprocessing the scene or make some change to the ray.
 
@@ -40,16 +40,19 @@ We will see 4 spatial decomposition methods as shoed below
 
 | Uniform                                                  | KD-tree                                                  | Octree                                                   | BSP-tree                                                 |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| ![150](attachments/Accelerating%20Data%20Structures-5.png%5C) | ![150](attachments/Accelerating%20Data%20Structures-6.png%5C) | ![150](attachments/Accelerating%20Data%20Structures-7.png%5C) | ![150](attachments/Accelerating%20Data%20Structures-8.png%5C) |
+| ![150](attachments/Accelerating%20Data%20Structures-5.png) | ![150](attachments/Accelerating%20Data%20Structures-6.png) | ![150](attachments/Accelerating%20Data%20Structures-7.png) | ![150](attachments/Accelerating%20Data%20Structures-8.png) |
 | Built at once                                            | Fixed plane orientation, variable position and axis      | Fixed splitting operation                                | Arbitrary planes                                         | 
 
 ### Uniform Grid
 #### Preprocessing
-1. Compute bounding box (of the scene) ![](attachments/Accelerating%20Data%20Structures-4.png#center%7CBounding%20box%20of%20the%20scene%7C250)
-2. Determine grid resolution (often $\sim 3 n^{1/3}$) ![](attachments/Accelerating%20Data%20Structures.png#center%7CBounding%20box%20in%20grid%7C250)
+1. Compute bounding box (of the scene) 
+  ![](attachments/Accelerating%20Data%20Structures-4.png#center%7CBounding%20box%20of%20the%20scene%7C250)
+2. Determine grid resolution (often $\sim 3 n^{1/3}$)   
+![](attachments/Accelerating%20Data%20Structures.png#center%7CBounding%20box%20in%20grid%7C250)
 3. Insert objects into cells
 4. Rasterize bounding box
-5. Prune empty cells ![](attachments/Accelerating%20Data%20Structures-1.png#center%7CPrune%20empty%20cells%7C250)
+5. Prune empty cells  
+![](attachments/Accelerating%20Data%20Structures-1.png#center%7CPrune%20empty%20cells%7C250)
 6. Store reference for each object in cell
 
 #### Ray Intersection
@@ -67,8 +70,10 @@ We will see 4 spatial decomposition methods as shoed below
 ### KD-Trees [(Wikipedia)](https://en.wikipedia.org/wiki/K-d_tree)
 #### Preprocessing
 1. Compute bounding box of the scene
-2. Recursively split cell using axis-aligned plane, until termination criteria, e.g. maximum depth or minimum number of objects attained ![](attachments/Accelerating%20Data%20Structures-9.png#center%7CSpace%20division%20by%20KD-tree%7C250)
-3. Build binary tree structure ![](attachments/Accelerating%20Data%20Structures-10.png#center%7CBinary%20tree%20structure%7C300)
+2. Recursively split cell using axis-aligned plane, until termination criteria, e.g. maximum depth or minimum number of objects attained 
+![](attachments/Accelerating%20Data%20Structures-9.png#center%7CSpace%20division%20by%20KD-tree%7C250)
+3. Build binary tree structure 
+![](attachments/Accelerating%20Data%20Structures-10.png#center%7CBinary%20tree%20structure%7C300)
 	1. Internal nodes store
 		1. Split axis: x, y or z axis
 		2. Split position: coordinate of split plane along axis
@@ -86,12 +91,12 @@ The intersection is done by a top-down recursion
 
 | Current node                                              | Current box                                               |
 | --------------------------------------------------------- | --------------------------------------------------------- |
-| ![200](attachments/Accelerating%20Data%20Structures-17.png%5C) | ![200](attachments/Accelerating%20Data%20Structures-11.png%5C) |
-| ![200](attachments/Accelerating%20Data%20Structures-18.png%5C)                                                          | ![200](attachments/Accelerating%20Data%20Structures-12.png%5C) |
-| ![200](attachments/Accelerating%20Data%20Structures-19.png%5C)                                                          | ![200](attachments/Accelerating%20Data%20Structures-13.png%5C) |
-| ![200](attachments/Accelerating%20Data%20Structures-20.png%5C)                                                          | ![200](attachments/Accelerating%20Data%20Structures-14.png%5C) |
-| ![200](attachments/Accelerating%20Data%20Structures-21.png%5C)                                                          | ![200](attachments/Accelerating%20Data%20Structures-15.png%5C) |
-| ![200](attachments/Accelerating%20Data%20Structures-22.png%5C)                                                          | ![200](attachments/Accelerating%20Data%20Structures-16.png%5C) |
+| ![200](attachments/Accelerating%20Data%20Structures-17.png) | ![200](attachments/Accelerating%20Data%20Structures-11.png) |
+| ![200](attachments/Accelerating%20Data%20Structures-18.png)                                                          | ![200](attachments/Accelerating%20Data%20Structures-12.png) |
+| ![200](attachments/Accelerating%20Data%20Structures-19.png)                                                          | ![200](attachments/Accelerating%20Data%20Structures-13.png) |
+| ![200](attachments/Accelerating%20Data%20Structures-20.png)                                                          | ![200](attachments/Accelerating%20Data%20Structures-14.png) |
+| ![200](attachments/Accelerating%20Data%20Structures-21.png)                                                          | ![200](attachments/Accelerating%20Data%20Structures-15.png) |
+| ![200](attachments/Accelerating%20Data%20Structures-22.png)                                                          | ![200](attachments/Accelerating%20Data%20Structures-16.png) |
 1. If root node: 
 	1. If no intersection with bounding box: return empty intersection list
 	2. If intersection with bounding box: set $t_{min}$, $t_{max}$, do the same as if at internal node
@@ -113,8 +118,10 @@ The intersection is done by a top-down recursion
 2. Recursively subdivide cells into 8(4 for 2D space) equal sub-cells until termination criteria attained
 
 #### Ray Intersection
-Similar to KD trees
+Similar to KD trees  
+
 ![400](attachments/Accelerating%20Data%20Structures-24.png)
+
 **Pros**:
 - Easier to implement
 - Cheaper costs for insertion and deletion
@@ -146,7 +153,7 @@ The bounding volume hierarchies could be constructed either top down or bottom u
 
 |                                                           | Top down                                                  | Bottom up                                                 |
 | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| ![200](attachments/Accelerating%20Data%20Structures-26.png%5C) | ![200](attachments/Accelerating%20Data%20Structures-27.png%5C) | ![200](attachments/Accelerating%20Data%20Structures-28.png%5C) |
+| ![200](attachments/Accelerating%20Data%20Structures-26.png) | ![200](attachments/Accelerating%20Data%20Structures-27.png) | ![200](attachments/Accelerating%20Data%20Structures-28.png) |
 
 #### Ray-AABB Intersection
 ![](attachments/Accelerating%20Data%20Structures-29.png#center%7CRay-AABB%20intersection%20algorithm%7C400)
@@ -157,9 +164,12 @@ $$
 \mathbf{o}_{x} + t_{x_{2}}\mathbf{d}_{x} & = x_{max}
 \end{align}
 $$
-> **Algorithm**:
-> 1. Solve for $t_{x_{1}}$ and $t_{x_{2}}$ $$t_{x_{1}} = \frac{x_{min}-\mathbf{o}_{x}}{\mathbf{d}_{x}}, \quad t_{x_{2}} = \frac{x_{max}-\mathbf{o}_{x}}{\mathbf{d}_{x}}$$
-> 2. If $t_{x_{1}}>t_{x_{2}}$, swap($t_{x_{1}}$, $t_{x_{2}}$)
-> 3. Repeat for $t_{y_{1}}$, $t_{y_{2}}$, $t_{z_{1}}$, $t_{z_{2}}$.
-> 4. Set $t_{min}$ and $t_{max}$ $$\begin{align}t_{min}  & = \max(t_{x_{1}},t_{y_{1}}, t_{z_{1}})\\ t_{max} & = \min(t_{x_{2}},t_{y_{2}},t_{z_{2}})\end{align}$$
-> 5. Hit if $t_{min}<t_{max}$
+
+**Algorithm**:
+1. Solve for $t_{x_{1}}$ and $t_{x_{2}}$ 
+$$t_{x_{1}} = \frac{x_{min}-\mathbf{o}_{x}}{\mathbf{d}_{x}}, \quad t_{x_{2}} = \frac{x_{max}-\mathbf{o}_{x}}{\mathbf{d}_{x}}$$
+2. If $t_{x_{1}}>t_{x_{2}}$, swap($t_{x_{1}}$, $t_{x_{2}}$)
+3. Repeat for $t_{y_{1}}$, $t_{y_{2}}$, $t_{z_{1}}$, $t_{z_{2}}$.
+4. Set $t_{min}$ and $t_{max}$ 
+$$\begin{align}t_{min}  & = \max(t_{x_{1}},t_{y_{1}}, t_{z_{1}})\\ t_{max} & = \min(t_{x_{2}},t_{y_{2}},t_{z_{2}})\end{align}$$
+5. Hit if $t_{min}<t_{max}$
