@@ -45,7 +45,7 @@ We will see 4 spatial decomposition methods as shoed below
 
 ### Uniform Grid
 #### Preprocessing
-1. Compute bounding box (of the scene) 
+1. Compute bounding box (of the scene)   
   ![](attachments/Accelerating%20Data%20Structures-4.png#center%7CBounding%20box%20of%20the%20scene%7C250)
 2. Determine grid resolution (often $\sim 3 n^{1/3}$)   
 ![](attachments/Accelerating%20Data%20Structures.png#center%7CBounding%20box%20in%20grid%7C250)
@@ -70,9 +70,9 @@ We will see 4 spatial decomposition methods as shoed below
 ### KD-Trees [(Wikipedia)](https://en.wikipedia.org/wiki/K-d_tree)
 #### Preprocessing
 1. Compute bounding box of the scene
-2. Recursively split cell using axis-aligned plane, until termination criteria, e.g. maximum depth or minimum number of objects attained 
+2. Recursively split cell using axis-aligned plane, until termination criteria, e.g. maximum depth or minimum number of objects attained   
 ![](attachments/Accelerating%20Data%20Structures-9.png#center%7CSpace%20division%20by%20KD-tree%7C250)
-3. Build binary tree structure 
+3. Build binary tree structure   
 ![](attachments/Accelerating%20Data%20Structures-10.png#center%7CBinary%20tree%20structure%7C300)
 	1. Internal nodes store
 		1. Split axis: x, y or z axis
@@ -167,9 +167,17 @@ $$
 
 **Algorithm**:
 1. Solve for $t_{x_{1}}$ and $t_{x_{2}}$ 
+
 $$t_{x_{1}} = \frac{x_{min}-\mathbf{o}_{x}}{\mathbf{d}_{x}}, \quad t_{x_{2}} = \frac{x_{max}-\mathbf{o}_{x}}{\mathbf{d}_{x}}$$
-2. If $t_{x_{1}}>t_{x_{2}}$, swap($t_{x_{1}}$, $t_{x_{2}}$)
-3. Repeat for $t_{y_{1}}$, $t_{y_{2}}$, $t_{z_{1}}$, $t_{z_{2}}$.
-4. Set $t_{min}$ and $t_{max}$ 
+
+1. If $t_{x_{1}}>t_{x_{2}}$, swap $t_{x_{1}}$ and $t_{x_{2}}$ 
+
+
+1. Repeat for $t_{y_{1}}$, $t_{y_{2}}$, $t_{z_{1}}$, $t_{z_{2}}$.
+
+
+1. Set $t_{min}$ and $t_{max}$ 
+
 $$\begin{align}t_{min}  & = \max(t_{x_{1}},t_{y_{1}}, t_{z_{1}})\\ t_{max} & = \min(t_{x_{2}},t_{y_{2}},t_{z_{2}})\end{align}$$
-5. Hit if $t_{min}<t_{max}$
+
+1. Hit if $t_{min}<t_{max}$
