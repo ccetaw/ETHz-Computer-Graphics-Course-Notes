@@ -109,35 +109,53 @@ Usually if we want to sample a point on a surface or in a volume, the PDF is sim
 
 **Uniform(Area-Preserving) Sampling of a Disk**
 - pdf for uniform sampling on a disk in cartesian system
-	$$
-	p_c(x, y)= \begin{cases}\frac{1}{\pi} & x^2+y^2<1 \\ 0 & \text { otherwise }\end{cases}
-	$$
+
+
+$$
+p_c(x, y)= \begin{cases}\frac{1}{\pi} & x^2+y^2<1 \\ 0 & \text { otherwise }\end{cases}
+$$
+
+
 - Sample in polar coordinates $r, \theta$ where:
-	$$
-	x = r\cos\theta, \quad y = r\sin\theta
-	$$
+
+
+$$
+x = r\cos\theta, \quad y = r\sin\theta
+$$
+
+
 - Relate the PDFs
-	$$
-	p_{p}(r,\theta) = |J|p_{c}(x,y) = \frac{r}{\pi}
-	$$
+
+$$
+p_{p}(r,\theta) = |J|p_{c}(x,y) = \frac{r}{\pi}
+$$
+
 - Compute marginal and conditional 1D PDFs:
 	- Marginal PDF:
-		$$
-		p(r) = \int _{0}^{2\pi} p_{p}(r,\theta) \, d\theta = 2r
-		$$
+
+$$
+p(r) = \int _{0}^{2\pi} p_{p}(r,\theta) \, d\theta = 2r
+$$
+
 	- Conditional PDF:
-		$$
-		p(\theta|r) = \frac{p_{p}(r,\theta)}{p(r)} = \frac{1}{2\pi}
-		$$
+
+$$
+p(\theta|r) = \frac{p_{p}(r,\theta)}{p(r)} = \frac{1}{2\pi}
+$$
+
+
 - Using inversion method we have
-	$$
-	r = \sqrt{ \xi_{1} }, \quad \theta = 2\pi \xi_{2}
-	$$
+
+
+$$
+r = \sqrt{ \xi_{1} }, \quad \theta = 2\pi \xi_{2}
+$$
 
 **Uniform(Area Preserving) Sampling a Unit Sphere/ Hemisphere/ Sphere Cap**
 Archimedes’ hat box theorem
 ![400](attachments/MCI_11.jpeg)
 Enclose a sphere in a cylinder and cut out a spherical segment by slicing twice perpendicularly to the cylinder’s axis. Then the lateral surface area of the spherical segment $S_{1}$ is equal to the lateral surface area cut out of the cylinder $S_{2}$ by the same slicing planes, i.e.,
+
 $$
 S_{1} = S_{2} = 2\pi Rh
 $$
@@ -145,10 +163,13 @@ $$
 Using this property, we could sample a point on the cylinder and find a bijective mapping between cylinder and sphere, then map the point on the cylinder to the sphere. This could be easily done by using the same $z$ coordinate.
 
 The probability in cylindrical coordinates when sampling a cylinder is 
+
 $$
 p(\phi,z) = \frac{1}{2\pi} \cdot \frac{1}{z_{2}-z_{1}}
 $$
+
 and we could easily transform a square to this
+
 $$
 \begin{align}
 \phi & = 2\pi \xi_{1} \\
@@ -157,17 +178,20 @@ z & = (z_{2}-z_{1})\xi_{2}
 $$
 
 The corresponding spherical coordinates is 
+
 $$
 \begin{align}
 \theta  & = \arccos z \\
 \phi & = \phi
 \end{align}
 $$
+
 To sample on hemisphere and sphere cap, simply change the range of $z$ to match the height.
 
 **Cosine-weighted Hemispherical Sampling**
 Generating points uniformly on the disc, and then project these points to the surface of the hemisphere produces the desired distribution.
 The probability under spherical coordinates is 
+
 $$
 p(\theta, \phi) = 
 \begin{cases}
@@ -175,15 +199,19 @@ p(\theta, \phi) =
 0,  & \quad \text{else}
 \end{cases}
 $$
+
 If you compare the form with sampling on a disk, we could easily conclude that it’s the same distribution.
 ![400](attachments/MCI_10.png)
 
 **Beckmann Distribution**
 The cosine weighted Beckmann distribution is 
+
 $$
 p(\theta,\phi) = D(\theta) \cos\theta  = \frac{e^{ -\tan ^{2} \theta/\alpha^{2} }}{\pi \alpha^{2}\cos ^{4}\theta} \cos\theta
 $$
+
 The CDF is 
+
 $$
 \begin{align}
 P(\Theta, \Phi) & = \int _{0}^{\Theta}\int _{0}^{\Phi} p(\theta,\phi) \sin\theta \, d\theta  \, d\phi  \\
@@ -192,14 +220,18 @@ P(\Theta, \Phi) & = \int _{0}^{\Theta}\int _{0}^{\Phi} p(\theta,\phi) \sin\theta
   & = \frac{\Phi}{2\pi}[1 - e^{ -\tan ^{2}\Theta / \alpha^{2} }] = F_{1}(\Phi) F_{2}(\Theta)
 \end{align}
 $$
-where 
+
+where
+
 $$
 \begin{align}
 F_{1}(\Phi) & = \frac{\Phi}{2\pi} \\
 F_{2}(\Theta) & = 1 - e^{ -\tan ^{2}\Theta / \alpha^{2} }
 \end{align}
 $$
-which means we can sample $\phi, \theta$ independently. Inverse the function we have 
+
+which means we can sample $\phi, \theta$ independently. Inverse the function we have
+ 
 $$
 \begin{align}
 \phi & = 2\pi \xi_{1} \\
