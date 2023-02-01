@@ -32,10 +32,10 @@ $$
 f_{r}(\boldsymbol{\omega}_{o}, \boldsymbol{\omega}_{i}) = \frac{e+2}{2\pi}(\boldsymbol{\omega}_{h}\cdot \mathbf{n})^{e}
 $$
 
-where $\boldsymbol{\omega}_{h}$ is the half-way vector
+where $\boldsymbol{\omega}\_{h}$ is the half-way vector
 
 $$
-\boldsymbol{\omega}_{h} = \frac{\boldsymbol{\omega}_{i}+\boldsymbol{\omega}_{o}}{\|\boldsymbol{\omega}_{i} + \boldsymbol{\omega}_{o}\|}
+\boldsymbol{\omega}\_{h} = \frac{\boldsymbol{\omega}\_{i}+\boldsymbol{\omega}\_{o}}{\|\boldsymbol{\omega}\_{i} + \boldsymbol{\omega}\_{o}\|}
 $$
 
 ![500](attachments/MFT_2.png)
@@ -137,8 +137,8 @@ $$
 
 Note that the BRDF function is relevant with the half-way vector $\vec{\omega}_{h}$. We need to sample this vector to determine the BRDF function value. The general recipe is 
 - randomly generate a $\vec{\omega}_{h}$ with PDF proportional to $D$
-- reflect incident direction $\vec{\omega}_{i}$ about $\vec{\omega}_{h}$ to obtain $\vec{\omega}_{o}$
-- convert PDF($\vec{\omega}_{h}$) to PDF($\vec{\omega}_{o}$) 
+- reflect incident direction $\vec{\omega}\_{i}$ about $\vec{\omega}\_{h}$ to obtain $\vec{\omega}\_{o}$
+- convert PDF($\vec{\omega}\_{h}$) to PDF($\vec{\omega}\_{o}$) 
 
 $$
 p(\vec{\omega}_{o}) = p(\vec{\omega}_{h}) \frac{ d\vec{\omega}_{h} }{ d\vec{\omega}_{o} } = p(\vec{\omega}_{h}) \frac{1}{4|\vec{\omega}_{o}\cdot \vec{\omega}_{h}|} 
