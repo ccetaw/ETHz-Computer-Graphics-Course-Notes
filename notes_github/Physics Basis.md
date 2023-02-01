@@ -33,11 +33,11 @@ Basic quantities:
 
 | Quantity                    | Explanation                                                                                                                                | Formula                                                                                                                                                                                   |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Flux(Radiant flux / Power)  | Total amount of radiant energy passing through surface or space per unit time </p>  ![200](attachments/LandM_1.png%5C)                                  | $\Phi(A) \quad \left[ \frac{J}{s} = W \right]$                                                                                                                                            |
-| Irradiance                  | Flux per unit area arriving at a surface </p> ![200](attachments/LandM_2.png%5C)                                                                        | $B(\mathbf{x}) = \frac{d\Phi(A)}{dA(\mathbf{x})} \quad \left[ \frac{W}{m^{2}} \right]$                                                                                                    |
-| Radiosity(radiant exitance) | Flux per unit area leaving a surface </p> ![200](attachments/LandM_3.png%5C)                                                                            | $E(\mathbf{x}) =  \frac{d\Phi(A)}{dA(\mathbf{x})} \quad \left[ \frac{W}{m^{2}} \right]$                                                                                                   |
-| Radiant density             | Directional density of flux / power(flux) per solid angle </p>  ![200](attachments/LandM_4.png%5C)                                                      | $I(\mathbf{w}) =  \frac{d\Phi}{d\mathbf{w}} \quad  \left[ \frac{W}{\text{sr}} \right]$                                                                                                    |
-| Radiance                    | - Intensity per perpendicular unit area </br> - Flux density per unit solid angle, per perpendicular unit area  </p> ![300](attachments/LandM_6.png%5C) | $$\begin{align*}L(\mathbf{x}, \mathbf{w}) &= \frac{d I}{dA^{\perp}} \\ & = \frac{d^{2}\Phi(A)}{ \cos \theta dA(\mathbf{x}) d\mathbf{w}} \\  &= \frac{ dE }{ \cos\theta d\mathbf{w} } \end{align*}$$ |
+| Flux(Radiant flux / Power)  | Total amount of radiant energy passing through surface or space per unit time </p>  ![200](attachments/LandM_1.png)                                  | $\Phi(A) \quad \left[ \frac{J}{s} = W \right]$                                                                                                                                            |
+| Irradiance                  | Flux per unit area arriving at a surface </p> ![200](attachments/LandM_2.png)                                                                        | $B(\mathbf{x}) = \frac{d\Phi(A)}{dA(\mathbf{x})} \quad \left[ \frac{W}{m^{2}} \right]$                                                                                                    |
+| Radiosity(radiant exitance) | Flux per unit area leaving a surface </p> ![200](attachments/LandM_3.png)                                                                            | $E(\mathbf{x}) =  \frac{d\Phi(A)}{dA(\mathbf{x})} \quad \left[ \frac{W}{m^{2}} \right]$                                                                                                   |
+| Radiant density             | Directional density of flux / power(flux) per solid angle </p>  ![200](attachments/LandM_4.png)                                                      | $I(\mathbf{w}) =  \frac{d\Phi}{d\mathbf{w}} \quad  \left[ \frac{W}{\text{sr}} \right]$                                                                                                    |
+| Radiance                    | - Intensity per perpendicular unit area </br> - Flux density per unit solid angle, per perpendicular unit area  </p> ![300](attachments/LandM_6.png) | $$\begin{align*}L(\mathbf{x}, \mathbf{w}) &= \frac{d I}{dA^{\perp}} \\\\ & = \frac{d^{2}\Phi(A)}{ \cos \theta dA(\mathbf{x}) d\mathbf{w}} \\  &= \frac{ dE }{ \cos\theta d\mathbf{w} } \end{align*}$$ |
 
 Among all these quantities, radiance is the most important one. 
 - **Fundamental quantity for ray tracing**
@@ -46,21 +46,27 @@ Among all these quantities, radiance is the most important one.
 
 ## Supplementary: Solid Angle
 Just like a planar angle in radians is the ratio of the length of an arc to its radius, a solid angle in steradians is the ratio of the area covered on a sphere by an object to the area given by the square of the radius of said sphere. The formula is
+
 $$
 \Omega = \frac{A}{r^{2}}
 $$
 
 In spherical coordinates, the formula for differential solid angle is
+
 $$
 d\Omega = \frac{dA}{r^{2}} = \sin\theta \,d\theta \,d\phi
 $$
+
 The solid angle for an arbitrary oriented surface $S$ subtended at a point $P$ is equal to the solid angle of the projection of the surface $S$ to the unit sphere with center $P$, which can be calculated as the surface integral
+
 $$
 \Omega = \iint_{S} \frac{\vec{e}_{r}\cdot \vec{n}}{r^{2}}dS = \iint_{S} \sin\theta \,d\theta \,d\phi
 $$
+
 where $\vec{e}_{r}$ is the radial unit vector and $\vec{n}$ is the surface normal.
 
 In differential form
+
 $$
 d\Omega = \frac{dS}{r^{2}} (\vec{e}_{r}\cdot \vec{n})
 $$
