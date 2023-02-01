@@ -185,7 +185,8 @@ $$\begin{align}
 where $\mathcal{A}\in \mathbb{R}^{4\sharp F \times 2\sharp V}$, and $\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix} \in \mathbb{R}^{2\sharp V\times 1}$.
 Thus the problem becomes a least square problem:
 
-$$\underset{\mathbf{u},\mathbf{v}}{\min} \quad \left\|\mathcal{A}\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix}\right\|^2 \Leftrightarrow \text{solve} \quad \mathcal{A}^\top\mathcal{A}\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix} = 0$$
+$$\underset{\mathbf{u},\mathbf{v}}{\min} \quad \left\|\mathcal{A}\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix}\right\|^2 \Leftrightarrow \text{solve} \quad \mathcal{A}^\top\mathcal{A}\begin{pmatrix}\mathbf{u}\\ 
+\mathbf{v}\end{pmatrix} = 0$$
 
 ==We have flattened $(\mathbf{u}, \mathbf{v})$ to $(\mathbf{u}; \mathbf{v})$ and made the problem become 1-dimensional.== 
 Actually 
@@ -194,7 +195,8 @@ $$\begin{align}
 \mathcal{A}^\top\mathcal{A}  
 &= \begin{pmatrix}\mathcal{D}_x^\top A \mathcal{D}_x +\mathcal{D}_y^\top A \mathcal{D}_y & 0 \\ 0 & \mathcal{D}_x^\top A \mathcal{D}_x + \mathcal{D}_y^\top A \mathcal{D}_y
 \end{pmatrix} \\
-&= \begin{pmatrix}L & 0 \\ 0 & L \end{pmatrix}
+&= \begin{pmatrix}L & 0 \\ 
+0 & L \end{pmatrix}
 \end{align}$$
 
 where $L$ is the Laplacian operator. We can verify this is exactly equivalent to the [](.md#Harmonic%20mapping%7Charmonic%20mapping) that we have defined. 
@@ -206,11 +208,16 @@ $$\mathcal{C} \begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix} = \mathbf{d}$$
 where $\mathcal{C}\in \mathbb{R}^{\sharp C\times 2\sharp V}$ and $\mathbf{d}\in\mathbb{R}^{2\sharp V\times 1}$, $\sharp C$ is the number of constraints.
 We reformulate the optimization in the Lagrangian multiplier framework: 
 
-$$\underset{\mathbf{u},\mathbf{v},\mathbf{\lambda}} {\min}\left\|\mathcal{A}\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix} - \mathbf{b}\right\|^2 + \lambda^\top\left(\mathcal{C} \begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix}-\mathbf{d}\right)$$
+$$\underset{\mathbf{u},\mathbf{v},\mathbf{\lambda}} {\min}\left\|\mathcal{A}\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix} - \mathbf{b}\right\|^2 + \lambda^\top\left(\mathcal{C} \begin{pmatrix}\mathbf{u}\\ 
+\mathbf{v}\end{pmatrix}-\mathbf{d}\right)$$
 
 where $\mathbf{b}$ is added to extend to a more general form, and this is equivalent to solve 
 
-$$\begin{pmatrix}\mathcal{A}^\top\mathcal{A}  & \mathcal{C}^\top \\ \mathcal{C} & 0\end{pmatrix} \begin{pmatrix} \mathbf{u} \\ \mathbf{v} \\ \lambda \end{pmatrix} = \begin{pmatrix} \mathcal{A}^\top\mathbf{b} \\ \mathbf{d} \end{pmatrix}$$
+$$\begin{pmatrix}\mathcal{A}^\top\mathcal{A}  & \mathcal{C}^\top \\
+\mathcal{C} & 0\end{pmatrix} \begin{pmatrix} \mathbf{u} \\ 
+\mathbf{v} 
+\\ \lambda \end{pmatrix} = \begin{pmatrix} \mathcal{A}^\top\mathbf{b} 
+\\ \mathbf{d} \end{pmatrix}$$
 
 #### LSCM
 The problem can be formulated into
@@ -221,7 +228,9 @@ Following the same conversion, we have
 
 $$\mathcal{A} = 
 \begin{pmatrix}
-A^{1/2}\mathcal{D}_x & -A^{1/2}\mathcal{D}_y \\ A^{1/2}\mathcal{D}_y & A^{1/2}\mathcal{D}_x \\ A^{1/2}\mathcal{D}_y & A^{1/2}\mathcal{D}_x \\ 
+A^{1/2}\mathcal{D}_x & -A^{1/2}\mathcal{D}_y \\
+A^{1/2}\mathcal{D}_y & A^{1/2}\mathcal{D}_x \\ 
+A^{1/2}\mathcal{D}_y & A^{1/2}\mathcal{D}_x \\ 
 -A^{1/2}\mathcal{D}_x & A^{1/2}\mathcal{D}_y \end{pmatrix}$$
 
 and $\mathcal{A}^\top\mathcal{A}$ can be calculated easily.
@@ -235,13 +244,14 @@ where $R_k$ is the rotation matrix estimated based on the current $\mathbf{u}, \
 $$\begin{align}
 &\sum_{k=1}^{\sharp F} A_k \|J_k - R_k\|_F^2 \\
 &= \left\|\begin{pmatrix}A^{1/2}\mathcal{D}_x & 0 \\ 
-A^{1/2}\mathcal{D}_y & 0 \\ 0 & A^{1/2}\mathcal{D}_x \\ 
+A^{1/2}\mathcal{D}_y & 0 \\ 
+0 & A^{1/2}\mathcal{D}_x \\ 
 0 & A^{1/2}\mathcal{D}_y \end{pmatrix}\begin{pmatrix}\mathbf{u}\\ 
 \mathbf{v}\end{pmatrix}- 
 \begin{pmatrix}A^{1/2}R_{11} \\ 
-A^{1/2}R_{12} 
-\\ A^{1/2}R_{21} 
-\\ A^{1/2}R_{22}\end{pmatrix}\right\|^2 
+A^{1/2}R_{12} \\
+A^{1/2}R_{21} \\ 
+A^{1/2}R_{22}\end{pmatrix}\right\|^2 
 \end{align}$$
 
 where $R_{11} = (\{R_{k_{11}}\})^\top$.
