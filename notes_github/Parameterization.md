@@ -84,7 +84,7 @@ $$\begin{pmatrix}\sum_{j\in\mathcal{N}(1)}k_{1j} & * & \cdots & * \\ * & \sum_{j
 \begin{pmatrix}\mathbf{u}_1 \\ \mathbf{u}_2 \\ \vdots \\ \mathbf{u}_n\end{pmatrix}
 =\begin{pmatrix}\bar{\mathbf{u}}_1 \\ \bar{\mathbf{u}}_2  \\ \vdots \\ \bar{\mathbf{u}}_n\end{pmatrix}$$
 
-where $B$ is the set of boundary vertices and $\bar{\mathbf{u}}_i$ is $\sum_{j\in\mathcal{N}(i)\cap B}k_{ij}\mathbf{u}_j$ and $*$ replaces $-k_{ij}\mathbb{1}_{j\in \mathcal{N}(i)\backslash B}$. We notice that the matrix on the l.h.s. is actually the Laplacian operator. 
+where $B$ is the set of boundary vertices and $\bar{\mathbf{u}}\_i$ is $\sum\_{j\in\mathcal{N}(i)\cap B}k\_{ij}\mathbf{u}]_j$ and $*$ replaces $-k\_{ij}\mathbb{1}\_{j\in \mathcal{N}(i)\backslash B}$. We notice that the matrix on the l.h.s. is actually the Laplacian operator. 
 We have two choices of different weights. 
 1. **uniform** where we set $k_{ij}=1$.
 2. **cotan** where we set $k_{ij}=\cot \phi_{ij}+ \cot \phi_{ji}$.
@@ -105,9 +105,11 @@ which is linear in the unknown $\{u_i,v_i\}$. Moreover, we can easily see that t
 The good mapping that we desire should have minimum distortion which means we want to **preserve the triangle shape**. Ideally $J_T$ should be a multiplication of rescaling and rotation matrix.
 
 ### LSCM(Least Squares Conformal Maps)
-In the LSCM setting, we allow rescaling and rotation. An ideal Jacobian should be like $$J_T
+In the LSCM setting, we allow rescaling and rotation. An ideal Jacobian should be like 
+$$J_T
 = \begin{pmatrix}s & 0 \\ 0 & s\end{pmatrix}\begin{pmatrix}\cos\phi & \sin\phi \\ -\sin\phi & \cos\phi\end{pmatrix}
 =\begin{pmatrix}s\cos\phi & s\sin\phi \\ -s\sin\phi & s\cos\phi\end{pmatrix}=\begin{pmatrix}a & b \\ -b & a\end{pmatrix}$$
+
 Let 
 
 $$J_T=
@@ -167,13 +169,17 @@ The problem can be formulated as
 
 $$\underset{\mathbf{u},\mathbf{v}}{\min}\sum_{k=1}^{\sharp F} A_k \|J_k\|_F^2$$
 
-where $\|\cdot\|_F$ denotes the Frobenius norm. Let $A = \text{diag}(A_1,\dots,A_{\sharp F})$, $\mathcal{D}_x = (D_x^1 ; D_x^2 ; \dots ; D_x^{\sharp F})\in \mathbb{R}^{\sharp F\times \sharp V}$, and $\mathcal{D}_y$ is defined similarly. Then
+where $\|\cdot\|\_F$ denotes the Frobenius norm. Let $A = \text{diag}(A\_1,\dots,A\_{\sharp F})$, $\mathcal{D}_x = (D_x^1 ; D_x^2 ; \dots ; D_x^{\sharp F})\in \mathbb{R}^{\sharp F\times \sharp V}$, and $\mathcal{D}_y$ is defined similarly. Then
 
 $$\begin{align}
 \sum_{k=1}^{\sharp F} A_k \|J_k\|_F^2
 & = \sum_{k=1}^{\sharp F} A_k\|(D^k_x\mathbf{u} , D^k_y\mathbf{v} , D^k_x\mathbf{u} , D^k_y\mathbf{v})\|^2 \\
 &= \|A^{1/2}(\mathcal{D}_x\mathbf{u},\mathcal{D}_y\mathbf{u}, \mathcal{D}_x\mathbf{v}, \mathcal{D}_y\mathbf{v})\|^2_F \\
-&= \left\|\begin{pmatrix}A^{1/2}\mathcal{D}_x & 0 \\A^{1/2}\mathcal{D}_y & 0 \\ 0 & A^{1/2}\mathcal{D}_x \\ 0 & A^{1/2}\mathcal{D}_y \end{pmatrix}\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix}\right\|^2 = \left\|\mathcal{A}\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix}\right\|^2
+&= \left\|\begin{pmatrix}A^{1/2}\mathcal{D}_x & 0 \\A^{1/2}\mathcal{D}_y & 0 \\ 
+0 & A^{1/2}\mathcal{D}_x \\ 
+0 & A^{1/2}\mathcal{D}_y \end{pmatrix}\begin{pmatrix}\mathbf{u}\\ 
+\mathbf{v}\end{pmatrix}\right\|^2 = \left\|\mathcal{A}\begin{pmatrix}\mathbf{u}\\ 
+\mathbf{v}\end{pmatrix}\right\|^2
 \end{align}$$
 
 where $\mathcal{A}\in \mathbb{R}^{4\sharp F \times 2\sharp V}$, and $\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix} \in \mathbb{R}^{2\sharp V\times 1}$.
@@ -228,7 +234,14 @@ where $R_k$ is the rotation matrix estimated based on the current $\mathbf{u}, \
 
 $$\begin{align}
 &\sum_{k=1}^{\sharp F} A_k \|J_k - R_k\|_F^2 \\
-&= \left\|\begin{pmatrix}A^{1/2}\mathcal{D}_x & 0 \\A^{1/2}\mathcal{D}_y & 0 \\ 0 & A^{1/2}\mathcal{D}_x \\ 0 & A^{1/2}\mathcal{D}_y \end{pmatrix}\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix}- \begin{pmatrix}A^{1/2}R_{11} \\ A^{1/2}R_{12} \\ A^{1/2}R_{21} \\ A^{1/2}R_{22}\end{pmatrix}\right\|^2 
+&= \left\|\begin{pmatrix}A^{1/2}\mathcal{D}_x & 0 \\ 
+A^{1/2}\mathcal{D}_y & 0 \\ 0 & A^{1/2}\mathcal{D}_x \\ 
+0 & A^{1/2}\mathcal{D}_y \end{pmatrix}\begin{pmatrix}\mathbf{u}\\ 
+\mathbf{v}\end{pmatrix}- 
+\begin{pmatrix}A^{1/2}R_{11} \\ 
+A^{1/2}R_{12} 
+\\ A^{1/2}R_{21} 
+\\ A^{1/2}R_{22}\end{pmatrix}\right\|^2 
 \end{align}$$
 
 where $R_{11} = (\{R_{k_{11}}\})^\top$.
