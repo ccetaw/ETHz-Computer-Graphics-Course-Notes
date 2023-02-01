@@ -15,11 +15,12 @@ BRDF means Bidirectional Reflectance Distribution Function, which provides a rel
 $$f_{r}(\mathbf{x}, \mathbf{w}_{i}, \mathbf{w}_{r}) = \frac{ dL_{r}(\mathbf{x},\mathbf{w}_{r}) }{ dE_{i}(\mathbf{x},\mathbf{w}_{i}) } =  \frac{ dL_{r}(\mathbf{x},\mathbf{w}_{r}) }{ L_{i}(\mathbf{x},\mathbf{w}_{i})\cos\theta_{i}d\mathbf{w}_{i} } \quad \left[ \frac{1}{\text{sr}} \right]$$
 
 ### Reflection Equation
-$$
-L_{r}(\mathbf{x}, \mathbf{w}_{r}) = \int _{H^{2}} f_{r}(\mathbf{x}, \mathbf{w}_{i}, \mathbf{w}_{r})L_{i}(\mathbf{x},\mathbf{w}_{i})\cos\theta_{i}  \, d\mathbf{w}_{i} 
-$$
-The reflection equation describes a local illumination model: 
-![500](attachments/AM_2.png)
+$$L_{r}(\mathbf{x}, \mathbf{w}_{r}) = \int _{H^{2}} f_{r}(\mathbf{x}, \mathbf{w}_{i}, \mathbf{w}_{r})L_{i}(\mathbf{x},\mathbf{w}_{i})\cos\theta_{i}  \, d\mathbf{w}_{i} $$
+
+The reflection equation describes a local illumination model:  
+
+![500](attachments/AM_2.png)  
+
 which results in the reflected radiance due to incident illumination from all directions.
 
 ### BRDF Properties
@@ -46,44 +47,44 @@ If the BRDF is unchanged as the material is rotated around the normal, then it i
 Lambertian reflectance is the property that defines an ideal "matte" or diffusely reflecting surface. The apparent brightness of a Lambertian surface to an observer ==is the same regardless of the observer's angle of view==.  
 
 **For Lambertian reflection, the BRDF is a constant**. Thus we could write
-$$
-\begin{align}
+$$\begin{align}
 L_{r}(\mathbf{w},\mathbf{w}_{r})  & = \int _{H^{2}} f_{r}(\mathbf{x}, \mathbf{w}_{i}, \mathbf{w}_{r})L_{i}(\mathbf{x},\mathbf{w}_{i})\cos\theta_{i}  \, d\mathbf{w}_{i}  \\
   & = f_{r}\int _{H^{2}} L_{i}(\mathbf{x},\mathbf{w}_{i})\cos\theta_{i}  \, d\mathbf{w}_{i}  \\
   & = f_{r} E(\mathbf{x})
-\end{align}
-$$
+\end{align}$$
+
 If all incoming light is reflected, then
-$$
-\begin{align}
+
+$$\begin{align}
 E(\mathbf{x})  & = B(\mathbf{x}) \\
 B(\mathbf{x})  & = \int _{H^{2}}L_{r}(\mathbf{x})\cos \, d\mathbf{w}  \\
   & = L_{r}(\mathbf{x})\int _{H^{2}} \cos\theta\, d\mathbf{w} \\
   & = L_{r}(\mathbf{x})\pi 
-\end{align}
-$$
+\end{align}$$
+
 which leads to 
-$$
-f_{r} = \frac{1}{\pi}
-$$
+
+$$f_{r} = \frac{1}{\pi}$$
+
 In resume, for Lambertian reflection, the reflected radiance is 
-$$
-L_{r} = \frac{\rho}{\pi} \int _{H^{2}}L_{i}(\mathbf{x},\mathbf{w}_{i})\cos\theta_{i} \, d\mathbf{w}_{i}
-$$
+
+$$L_{r} = \frac{\rho}{\pi} \int _{H^{2}}L_{i}(\mathbf{x},\mathbf{w}_{i})\cos\theta_{i} \, d\mathbf{w}_{i}$$
+
 where $\rho\in [0,1]$ is the diffuse reflectance:
 - $\rho=1$: all energy is (diffusely) reflected
 - $\rho=0$: all energy is absorbed
 
 ### Ideal Specular Reflection
-![550](attachments/AM_5.png)
+![550](attachments/AM_5.png)  
+
 Every ray is reflected according to the geometrical rule without loss of energy. The BRDF is thus a delta function.
 The reflected direction is 
-$$
-\mathbf{w}_{r} = 2(\mathbf{w}_{i}\cdot\mathbf{n})\mathbf{n} - \mathbf{w}_{i}
-$$
+
+$$\mathbf{w}_{r} = 2(\mathbf{w}_{i}\cdot\mathbf{n})\mathbf{n} - \mathbf{w}_{i}$$
 
 ### Ideal Specular Refraction
-![500](attachments/AM_6.png)
+![500](attachments/AM_6.png)  
+
 Every ray is refracted according to the geometrical rule without loss of energy. By Snell's law:
 $$
 \eta_{1}\sin\theta_{1} = \eta_{2}\sin\theta_{2}
