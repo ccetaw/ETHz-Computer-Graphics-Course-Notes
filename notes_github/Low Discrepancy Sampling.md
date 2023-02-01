@@ -19,21 +19,29 @@ We will try to deduce the theory from Fourier analysis in 1D. Denote the functio
 
 #### Sampling and Reconstruction in Space
 The sampling process requires us to choose a set of equally spaced sample positions and compute the function’s value at those positions. Which is equivalent to multiply $f(x)$ with a shah function 
+
 $$
 m_{T}(x) = T\sum_{i=-\infty}^{\infty}\delta(x-iT)
 $$
+
 where $T$ defines the period, or sampling rate. The sampled values are thus
+
 $$
 m_{T}(x) f(x) = T\sum_{i}\delta(x-iT) f(iT)
 $$
+
 These sample values can be used to define a reconstructed function $\tilde{f}$ by choosing a reconstruction filter function $r(x)$ and computing the convolution
+
 $$
 (m_{T}(x)f(x))*r(x)
 $$
+
 For reconstruction, convolution gives a weighted sum of scaled instances of the reconstruction filter centered at the sample points:
+
 $$
 \tilde{f}(x) = T\sum_{i=-\infty}^{\infty}f(iT)r(x-iT)
 $$
+
 #### Sampling and Reconstruction in Frequency
 We can gain a deeper understanding of the sampling process by analyzing the sampled function in the frequency domain.
 
@@ -42,38 +50,47 @@ In particular, we will be able to determine the conditions under which the origi
 Assume that the function $f(x)$ is band limited. By definition, band-limited functions have frequency space representations with compact support, such that $F(\omega) = 0$ for all $|\omega| > \omega_{0}$ where $\omega_{0}$ is the band limit. Assume also that we have $F(\omega)$ available in our hands. 
 
 Recall an important property of Fourier transform operator $\mathcal{F}$ 
+
 $$
 \begin{align}
 \mathcal{F}(f(x)g(x)) & = F(\omega)*G(\omega) \\
 \mathcal{F}(f(x)*g(x)) & = F(\omega)G(\omega)
 \end{align}
 $$
+
 and the Fourier transform of the shah function is 
+
 $$
 \mathcal{F}(m_{T}(x)) = m_{\frac{1}{T}}(\omega)
 $$
+
 ==The frequency domain representation of the sampled signal is given by the convolution of $F(\omega)$ and this new shah function.== Convolving a function with a delta function just yields a copy of the function, so convolving with a shah function yields an infinite sequence of copies of the original function, with spacing equal to the period of the shah. 
 
 ![](attachments/Low%20Discrepancy%20Sampling-1.png#center%7CThe%20Convolution%20of%20F(%CF%89)%20and%20the%20Shah%20Function.%20The%20result%20is%20infinitely%20many%20copies%20of%20F%7C500)
 
 In order to throw away all but the center copy of the spectrum, we multiply by a gate function of the appropriate width. The gate function $g_{T}(x)$ of width $T$ is defined as 
+
 $$
 g_{T}(x) = \begin{cases}
 \frac{1}{2T} & \quad |x|<T \\
 0 & \quad \text{otherwise}
 \end{cases}
 $$
+
 ![](attachments/Low%20Discrepancy%20Sampling-2.png#center%7CMultiplying%20a%20series%20of%20copies%20of%20F(%CF%89)%20by%20the%20appropriate%20box%20function%20yields%20the%20original%20spectrum.%7C600)
 
 This multiplication step corresponds to convolution with the reconstruction filter in the spatial domain. This is ==the ideal sampling and reconstruction process==:
+
 $$
 \tilde{F} = \left( F(\omega)*m_{\frac{1}{T}(\omega)} \right)g_{T(\omega)} = F(\omega)
 $$
 
 Take the inverse Fourier transform of $\tilde{F}$ we get the ideal sampling and reconstruction process in spatial domain:
+
 $$
 \tilde{f} = (f(x)m_{T}(x))*\text{sinc}(x) = \sum_{i=-\infty}^{\infty}\text{sinc}(x-i)f(i)
 $$
+
 Unfortunately, because the $\text{sinc}$ function has infinite extent, it is necessary to use all of the sample values $f(i)$ to compute any particular value of $\tilde{f}(x)$ in the spatial domain. Filters with finite spatial extent are preferable for practical implementations even though they don’t reconstruct the original function perfectly.
 
 ### Aliasing
@@ -115,8 +132,8 @@ Outside of Fourier analysis, mathematicians have developed a concept called *dis
 
 > *Definition: Discrepancy*:
 > Given a sequence of sample points $P={x_{1},..,x_{N}}$ and a family of shapes $B$ that are subsets of $[0,1)^{n}$, the discrepancy of $P$ w.r.t. $B$ is 
-> $$D_{N}(B,P) = \underset{ b\in B }{ \sup } \left|\frac{\#\{ x_{i}\in b \}}{N} - V(b)\right|$$
-> where $\#\{ x_{i} \in b \}$ is the number of points in $b$ and $V(b)$ is the volume of $b$.
+> $$D_{N}(B,P) = \underset{ b\in B }{ \sup } \left|\frac{\text{num}\{ x_{i}\in b \}}{N} - V(b)\right|$$
+> where $\text{num}\{ x_{i} \in b \}$ is the number of points in $b$ and $V(b)$ is the volume of $b$.
 
 When the set of shapes $B$ is the set of boxes with a corner at the origin, this value is called the star discrepancy $D^{*}_{N}(P)$. 
 
@@ -170,27 +187,35 @@ An advantage of LHS is that it minimizes clumping of the samples when they are p
 
 ### Hammersley and Halton Sequences
 The Halton and Hammersley sequences are two closely related low-discrepancy point sets. Both are based on a construction called the *radical inverse* which is based on the fact that a positive integer value $a$ can be expressed in a base $b$ with a sequence of digits $d_{m}(a) ... d_{2}(a)d_{1}(a)$ uniquely determined by
+
 $$
 a = \sum_{i=1}^{m}d_{i}(a)b^{i-1}
 $$
+
 where all digits $d_{i}(a)$ are between $0$ and $b-1$. 
 
 The radical inverse function $\Phi_{b}$ in base $b$ converts a nonnegative integer $a$ to a fractional value in $[0, 1)$ by reflecting these digits about the radix point:
+
 $$
 \Phi_{b}(a) = 0.d_{1}(a)d_{2}(a)\dots d_{m}(a)
 $$
+
 To generate points in an $n$-dimensional Halton sequence, we use the radical inverse base $b$, with a different base for each dimension of the pattern. The bases used must all be relatively prime to each other, so a natural choice is to use the first $n$ prime numbers $(p_{1},\dots, p_{n})$:
+
 $$
 x_{a} = (\Phi_{2}(a),\Phi_{3}(a),\Phi_{5}(a),\dots,\Phi_{p_{n}}(a))
 $$
 
 The discrepancy of an $n$-dimensional Halton sequence is
+
 $$
 D_{N}^{*}(x_{a}) = O\left(  \frac{(\log N)^{n}}{N} \right)
 $$
+
 which is asymptotically optimal.
 
 If the number of samples N is fixed, the Hammersley point set can be used, giving slightly lower discrepancy. Hammersley point sets are defined by
+
 $$
 x_{a} = \left( \frac{a}{N},\Phi_{b_{1}}(a), \Phi_{b_{2}}(a),\dots,\Phi_{b_{n}}(a) \right)
 $$
@@ -205,6 +230,7 @@ $$
 ![](attachments/Low%20Discrepancy%20Sampling-12.png#center%7CHalton%20Sample%20Values%20without%20Scrambling%7C350)
 
 This issue can be addressed with scrambled Halton and Hammersley sequences, where a permutation is applied to the digits when computing the radical inverse:
+
 $$
 \Psi_{b}(a) = 0.p(d_{1}(a))p(d_{2}(a))\dots p(d_{m}(a))
 $$
@@ -219,9 +245,11 @@ $(0,2)$-sequence uses the first two dimensions of a low-discrepancy sequence der
 | ![Low Discrepancy Sampling-14](attachments/Low%20Discrepancy%20Sampling-14.png)                 | ![Low Discrepancy Sampling-15](attachments/Low%20Discrepancy%20Sampling-15.png) ![Low Discrepancy Sampling-16](attachments/Low%20Discrepancy%20Sampling-16.png) | ![Low Discrepancy Sampling-17](attachments/Low%20Discrepancy%20Sampling-17.png) ![Low Discrepancy Sampling-18](attachments/Low%20Discrepancy%20Sampling-18.png)                                                                                                               |
 
 In general, any sequence of length $2^{l_{1}+l_{2}}$ (where $l_{i}$ is a nonnegative integer) from a $(0,2)$-sequence satisfies the general stratification constraint: ==one element in one *elementary intervals*==. The set of elementary intervals in two dimensions, base $2$, is defined as 
+
 $$
 E = \left\{  \left[  \frac{a_{1}}{2^{l_{1}}}, \frac{a_{1}+1}{2l_{1}} \right)\times \left[ \frac{a_{2}}{2^{l_{2}}}, \frac{a_{2}+1}{2^{l_{2}}} \right)  \right\}
 $$
+
 where the integer $a_{i} = 0,1,2,4\dots,2^{l_{i}}-1$ and $l_{1}$ and $l_{2}$ are variables.
 
 ## References
