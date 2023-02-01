@@ -1,7 +1,7 @@
 # ETHz-Computer-Graphics-Course-Notes
 Personal notes for ETHz Computer Graphics HS2022 written in obsidian flavored but also github flavored markdown. You could also find pdf version but they might not be properly adjusted since I output them directly from my obsidian vault. Using obsidian and topaz theme is mostly recommended. 
 
-The notes are mainly adapted from the course slides in a more organized way. Some topics that are not explained in details in the slides are extended in the notes. However not all topics are covered. Some topics are more related to computer vision and you could find them in my another repo. 
+The notes are mainly adapted from the course slides in a more organized way. Some topics that are not explained in details in the slides are extended in the notes. However not all topics are covered. Some topics are more related to computer vision and you could find them in my another repo ![ETHz Computer Vision HS2022](https://github.com/ccetaw/computer-vision-ethz-2022). 
 
 Materials and papers I used to write these notes are included in the repo and you could find the references in the notes. 
 
