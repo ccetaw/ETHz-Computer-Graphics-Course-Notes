@@ -48,6 +48,7 @@ $$
 
 
 which is a linear system equivalent to 
+
 $$
 A_{n\times 3}\mathbf{x}_{3\times 1} = \mathbf{b}_{n\times 1}
 $$
@@ -106,8 +107,8 @@ We could still make it by
 
 | Mode     | Representation                                                                              | Formula                                                                                                                                                                                                                                                                                                                                                              | Pros/ Cons                                                                                                                                            |
 | -------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Forward  | ![150](attachments/Inverse%20Rendering-1.png) ![200](attachments/Inverse%20Rendering-2.png) | $$\begin{aligned}& \tilde{a}=\frac{\mathrm{d} a}{\mathrm{~d} a}=1 \\& \tilde{b}=\frac{\mathrm{d} b}{\mathrm{~d} a}=\frac{\partial f(a)}{\partial a} \tilde{a} \\& \tilde{c}=\frac{\mathrm{d} c}{\mathrm{~d} a}=\frac{\partial g(b)}{\partial b} \tilde{b} \\& \tilde{d}=\frac{\mathrm{d} d}{\mathrm{~d} a}=\frac{\partial h(c)}{\partial c} \tilde{c}\end{aligned}$$ | - Easy to implement <br> - Supports multiple outputs ![250](attachments/Inverse%20Rendering-6.png)<br> - Does not supports multiple inputs: expensive |
-| Backward | ![150](attachments/Inverse%20Rendering-4.png) ![200](attachments/Inverse%20Rendering-5.png) | $$\begin{aligned}& \hat{d}=\frac{\mathrm{d} d}{\mathrm{~d} d}=1 \\& \hat{c}=\frac{\mathrm{d} d}{\mathrm{~d} c}=\hat{d} \frac{\partial h(c)}{\partial c} \\& \hat{b}=\frac{\mathrm{d} d}{\mathrm{~d} b}=\hat{c} \frac{\partial g(b)}{\partial b} \\& \hat{a}=\frac{\mathrm{d} d}{\mathrm{~d} a}=\hat{b} \frac{\partial f(a)}{\partial a}\end{aligned}$$               | - Supports multiple inputs ![250](attachments/Inverse%20Rendering-7.png) <br> - Supports only a single output ![250](attachments/Inverse%20Rendering-8.png) <br> - Store the whole graph and meta-information per node                                                                                                                                                    |
+| Forward  | ![150](attachments/Inverse%20Rendering-1.png) ![200](attachments/Inverse%20Rendering-2.png) | $$\begin{align}& \tilde{a}=\frac{\mathrm{d} a}{\mathrm{~d} a}=1 \\& \tilde{b}=\frac{\mathrm{d} b}{\mathrm{~d} a}=\frac{\partial f(a)}{\partial a} \tilde{a} \\& \tilde{c}=\frac{\mathrm{d} c}{\mathrm{~d} a}=\frac{\partial g(b)}{\partial b} \tilde{b} \\& \tilde{d}=\frac{\mathrm{d} d}{\mathrm{~d} a}=\frac{\partial h(c)}{\partial c} \tilde{c}\end{align}$$ | - Easy to implement <br> - Supports multiple outputs ![250](attachments/Inverse%20Rendering-6.png)<br> - Does not supports multiple inputs: expensive |
+| Backward | ![150](attachments/Inverse%20Rendering-4.png) ![200](attachments/Inverse%20Rendering-5.png) | $$\begin{align}& \hat{d}=\frac{\mathrm{d} d}{\mathrm{~d} d}=1 \\& \hat{c}=\frac{\mathrm{d} d}{\mathrm{~d} c}=\hat{d} \frac{\partial h(c)}{\partial c} \\& \hat{b}=\frac{\mathrm{d} d}{\mathrm{~d} b}=\hat{c} \frac{\partial g(b)}{\partial b} \\& \hat{a}=\frac{\mathrm{d} d}{\mathrm{~d} a}=\hat{b} \frac{\partial f(a)}{\partial a}\end{align}$$               | - Supports multiple inputs ![250](attachments/Inverse%20Rendering-7.png) <br> - Supports only a single output ![250](attachments/Inverse%20Rendering-8.png) <br> - Store the whole graph and meta-information per node                                                                                                                                                    |
 
 ## Volume Optimization
 Recall that the [](Participating%20Media.md#Media%7Ctransmittance) of an volume is given by
@@ -115,6 +116,7 @@ Recall that the [](Participating%20Media.md#Media%7Ctransmittance) of an volume 
 $$
 T_{r}(\mathbf{x},\mathbf{x}_{z}) = e^{ -\int _{\mathbf{x}}^{\mathbf{x}_{z}}\sigma(\mathbf{x}) \, d\mathbf{x}  } = \frac{L_{\text{gt}}(\mathbf{x},\omega)}{L_{o}(\mathbf{x}_{z},\mathbf{\omega})}
 $$
+
 which could be rearranged to 
 
 $$
@@ -124,7 +126,7 @@ $$
 The left side could be replaced by an numerical approximation (ray marching) which gives a linear system
 
 $$
-W_{\#\text{pixels}\times\#\text{voxels}}\cdot\sigma_{\#\text{voxels}} = b_{\#\text{pixels}}
+W_{\text{pixels}\times\text{voxels}}\cdot\sigma_{\text{voxels}} = b_{\text{pixels}}
 $$
 
 ![Inverse Rendering-18](attachments/Inverse%20Rendering-18.png)
@@ -141,8 +143,8 @@ We could use a gonioreflectometer to measure a material's BRDF
 
 | Color Space  | Spectrum | Formula |
 | ------------ | -------- | ------- |
-| CIE 1931 XYZ <br> - Y: Luminance <br> - XZ plane: Chromaticity | ![Inverse Rendering-12](attachments/Inverse%20Rendering-12.png)         | $$\begin{aligned}X & =\int_\lambda L_{e, \lambda}(\lambda) \bar{x}(\lambda) d \lambda \\Y & =\int_\lambda L_{e, \lambda}(\lambda) \bar{y}(\lambda) d \lambda \\Z & =\int_\lambda L_{e, \lambda}(\lambda) \bar{z}(\lambda) d \lambda\end{aligned}$$        |
-| CIE 1931 RGB | ![Inverse Rendering-13](attachments/Inverse%20Rendering-13.png)         | $$\begin{aligned}R & =\int_\lambda L_{e, \lambda}(\lambda) \bar{r}(\lambda) d \lambda \\G & =\int_\lambda L_{e, \lambda}(\lambda) \bar{g}(\lambda) d \lambda \\B & =\int_\lambda L_{e, \lambda}(\lambda) \bar{b}(\lambda) d \lambda\end{aligned}$$        |
+| CIE 1931 XYZ <br> - Y: Luminance <br> - XZ plane: Chromaticity | ![Inverse Rendering-12](attachments/Inverse%20Rendering-12.png)         | $$\begin{align}X & =\int_\lambda L_{e, \lambda}(\lambda) \bar{x}(\lambda) d \lambda \\Y & =\int_\lambda L_{e, \lambda}(\lambda) \bar{y}(\lambda) d \lambda \\Z & =\int_\lambda L_{e, \lambda}(\lambda) \bar{z}(\lambda) d \lambda\end{align}$$        |
+| CIE 1931 RGB | ![Inverse Rendering-13](attachments/Inverse%20Rendering-13.png)         | $$\begin{align}R & =\int_\lambda L_{e, \lambda}(\lambda) \bar{r}(\lambda) d \lambda \\G & =\int_\lambda L_{e, \lambda}(\lambda) \bar{g}(\lambda) d \lambda \\B & =\int_\lambda L_{e, \lambda}(\lambda) \bar{b}(\lambda) d \lambda\end{align}$$        |
 
 ### Calibration
 ![Inverse Rendering-14](attachments/Inverse%20Rendering-14.png)
