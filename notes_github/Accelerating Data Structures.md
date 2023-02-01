@@ -178,6 +178,6 @@ $$t_{x_{1}} = \frac{x_{min}-\mathbf{o}_{x}}{\mathbf{d}_{x}}, \quad t_{x_{2}} = \
 
 1. Set $t_{min}$ and $t_{max}$ 
 
-$$\begin{align}t_{min}  & = \max(t_{x_{1}},t_{y_{1}}, t_{z_{1}})\\ t_{max} & = \min(t_{x_{2}},t_{y_{2}},t_{z_{2}})\end{align}$$
+$$\begin{align}t_{min}  & = \max(t_{x_{1}},t_{y_{1}}, t_{z_{1}}) \\ t_{max} & = \min(t_{x_{2}},t_{y_{2}},t_{z_{2}})\end{align}$$
 
-1. Hit if $t_{min}<t_{max}$
+1. Hit if $t_{min} \le t_{max}$
