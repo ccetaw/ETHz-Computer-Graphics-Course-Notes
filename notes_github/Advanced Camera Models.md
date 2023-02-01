@@ -7,47 +7,34 @@ date: 11/11/2022
 # Advanced Camera Models
 ## Optics Recap
 ### Paraxial Focusing
-![Advanced Camera Models-7](attachments/Advanced%20Camera%20Models-7.png)
+![Advanced Camera Models-7](attachments/Advanced%20Camera%20Models-7.png)  
+
 Snell's law of refraction states that:
-$$
-n\sin i = n'\sin i'
-$$
+$$n\sin i = n'\sin i'$$
 With paraxial approximation:
-$$
-ni \simeq n'i'
-$$
+$$ni \simeq n'i'$$
 which leads to
-$$
-\frac{n}{z} + \frac{n}{r} \simeq \frac{n'}{r} -\frac{n'}{z'}
-$$
+$$\frac{n}{z} + \frac{n}{r} \simeq \frac{n'}{r} -\frac{n'}{z'}$$
 
 ### Lens
 
-![Advanced Camera Models-5](attachments/Advanced%20Camera%20Models-5.png)
+![Advanced Camera Models-5](attachments/Advanced%20Camera%20Models-5.png)  
+
 Consider 2 spherical interfaces air-glass-air with thin lens assumption: $d\to 0$.
-$$
-\frac{1}{s_{o}}+\frac{1}{s-i} = (n-1)\left( \frac{1}{R_{1}}-\frac{1}{R_{2}} \right)
-$$
+
+$$\frac{1}{s_{o}}+\frac{1}{s-i} = (n-1)\left( \frac{1}{R_{1}}-\frac{1}{R_{2}} \right)$$
 
 By Gaussian lens formula, the focal length is defined to satisfy
-$$
-\frac{1}{s_{o}}+\frac{1}{s_{i}} = \frac{1}{f}
-$$
+$$\frac{1}{s_{o}}+\frac{1}{s_{i}} = \frac{1}{f}$$
 
 Move sensor relatively to the lens to focus on different distances. At $s_{o} = s_{i}=2f$, we have 1:1 imaging. And it's possible to focus on objects closer than focal length.
 
 The power of a lens is defined as 
-$$
-P= \frac{1}{f}
-$$
+$$P= \frac{1}{f}$$
 Combining lenses would be 
-$$
-\frac{1}{f_{\text{total}}} = \frac{1}{f_{1}}+\frac{1}{f_{2}}
-$$
+$$\frac{1}{f_{\text{total}}} = \frac{1}{f_{1}}+\frac{1}{f_{2}}$$
 and 
-$$
-P_{\text{total}} = P_{1} + P_{2}
-$$
+$$P_{\text{total}} = P_{1} + P_{2}$$
 
 ### Aperture
 ![Advanced Camera Models-6](attachments/Advanced%20Camera%20Models-6.png)
@@ -55,9 +42,9 @@ Aperture is referred to the lens diaphragm opening inside a photographic lens.
 It regulates the amount of light that passes through onto the sensor.
 
 [Aperture number](https://en.wikipedia.org/wiki/F-number), aka f-number is 
-$$
-N = \frac{f}{D}
-$$
+
+$$N = \frac{f}{D}$$
+
 where $f$ is the focal length and $D$ is the diameter of the entrance pupil(effective aperture).
 
 ### Depth of Field
@@ -72,14 +59,17 @@ where
 - $u$ the distance to subject
 
 ## Thin Lens
-![Advanced Camera Models-9](attachments/Advanced%20Camera%20Models-9.png)
-A thin lens camera is specified by its aperture diameter and focal length. ![Advanced Camera Models-10](attachments/Advanced%20Camera%20Models-10.png)
+![Advanced Camera Models-9](attachments/Advanced%20Camera%20Models-9.png)  
+
+A thin lens camera is specified by its aperture diameter and focal length. ![Advanced Camera Models-10](attachments/Advanced%20Camera%20Models-10.png)  
+
 Instead of generate a ray originated at the camera center, we sample a point on the lens and connect it to the point on the plane of focus where the ray without lens will hit. 
 
 We could also have non-disk aperture, for example, a heart or polygon shape to have beautiful bokeh.
 
 ## Motion Blur
-![Advanced Camera Models-8](attachments/Advanced%20Camera%20Models-8.png)
+![Advanced Camera Models-8](attachments/Advanced%20Camera%20Models-8.png)  
+
 When rays are generated, we give it a random time and integrate over time. The motion could be modeled either by moving camera or moving objects. It's easier to move the camera because the timeline of the ray is easily tracked. 
 
 ## Chromatic Aberration
