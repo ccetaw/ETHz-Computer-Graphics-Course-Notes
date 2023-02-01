@@ -47,6 +47,7 @@ If the BRDF is unchanged as the material is rotated around the normal, then it i
 Lambertian reflectance is the property that defines an ideal "matte" or diffusely reflecting surface. The apparent brightness of a Lambertian surface to an observer ==is the same regardless of the observer's angle of view==.  
 
 **For Lambertian reflection, the BRDF is a constant**. Thus we could write
+
 $$\begin{align}
 L_{r}(\mathbf{w},\mathbf{w}_{r})  & = \int _{H^{2}} f_{r}(\mathbf{x}, \mathbf{w}_{i}, \mathbf{w}_{r})L_{i}(\mathbf{x},\mathbf{w}_{i})\cos\theta_{i}  \, d\mathbf{w}_{i}  \\
   & = f_{r}\int _{H^{2}} L_{i}(\mathbf{x},\mathbf{w}_{i})\cos\theta_{i}  \, d\mathbf{w}_{i}  \\

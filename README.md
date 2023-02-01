@@ -10,7 +10,7 @@ Additionally, you could find in this repo [Computer Graphics ETHz 2022 Rendering
 Hope you enjoy this computer graphics course!
 
 
-## [Physics Basis](Physics%20Basis.md)
+## [Physics Basis](/notes_github/Physics%20Basis.md)
 ### Source of Light
 #### Incandescence
 #### Luminescence
@@ -21,7 +21,7 @@ Hope you enjoy this computer graphics course!
 #### Radiant density
 #### Radiance
 
-## [Shape Representation](Shape%20Representation.md)
+## [Shape Representation](/notes_github/Shape%20Representation.md)
 ### Parametric
 #### Parametric Curves
 #### Parametric Surfaces
@@ -33,7 +33,7 @@ Hope you enjoy this computer graphics course!
 #### Point Set Surfaces
 #### Polygonal Meshes
 
-## [Appearance Modeling](Appearance%20Modeling.md)
+## [Appearance Modeling](/notes_github/Appearance%20Modeling.md)
 ### BRDF
 #### Refection Equation
 #### BRDF Properties
@@ -42,7 +42,7 @@ Hope you enjoy this computer graphics course!
 #### Ideal Specular Reflection
 #### Ideal Specular Refraction
 
-## [Ray Tracing](Ray%20Tracing.md)
+## [Ray Tracing](/notes_github/Ray%20Tracing.md)
 ### Ray Definition
 #### Parametric Form
 ### Ray Generation
@@ -53,7 +53,7 @@ Hope you enjoy this computer graphics course!
 ##### Triangles
 ### Shading
 
-## [Sampling](Sampling.md)
+## [Sampling](/notes_github/Sampling.md)
 ### Rejection Sampling
 #### Disk
 #### Sphere
@@ -67,11 +67,11 @@ Hope you enjoy this computer graphics course!
 ##### Cosine-weighted Hemispherical Sampling
 ##### Beckmann Distribution
 
-## [Monte Carlo Integration](Monte%20Carlo%20Integration.md)
+## [Monte Carlo Integration](/notes_github/Monte%20Carlo%20Integration.md)
 ### Monte Carlo Method
 ### Importance Sampling
 
-## [Direct Illumination](Direct%20Illumination.md)
+## [Direct Illumination](/notes_github/Direct%20Illumination.md)
 ### Definition
 ### Formulation
 #### Hemispherical Form
@@ -97,7 +97,7 @@ Hope you enjoy this computer graphics course!
 #### One-Sample Model
 ### Environment Lighting
 
-## [Path Tracing](Path%20Tracing.md)
+## [Path Tracing](/notes_github/Path%20Tracing.md)
 ### Light Paths
 ### Recursive Rendering Equation
 ### Solving the Rendering Equation
@@ -106,11 +106,11 @@ Hope you enjoy this computer graphics course!
 ### Path Integral Framework
 ### Bidirectional Path Tracing
 
-## [Photon Mapping](Photon%20Mapping.md)
+## [Photon Mapping](/notes_github/Photon%20Mapping.md)
 ### Photon Mapping
 ### Progressive Photon Mapping
 
-## [Participating Media](Participating%20Media.md)
+## [Participating Media](/notes_github/Participating%20Media.md)
 ### Physics Background
 #### Media
 #### Phase Function
@@ -128,7 +128,7 @@ Hope you enjoy this computer graphics course!
 ##### Delta Tracking
 #### Volumetric Photon Mapping
 
-## [Advanced Camera Models](Advanced%20Camera%20Models.md)
+## [Advanced Camera Models](/notes_github/Advanced%20Camera%20Models.md)
 ### Optics Recap
 #### Paraxial Focusing
 #### Lens
@@ -139,7 +139,7 @@ Hope you enjoy this computer graphics course!
 ### Chromatic Aberration
 ### Typical Color Imaging Pipeline
 
-## [Image-Based Rendering](Image-Based%20Rendering.md)
+## [Image-Based Rendering](/notes_github/Image-Based%20Rendering.md)
 ### Rendering with No Geometry
 #### Plenoptic Modeling
 #### Light Field Rendering
@@ -151,7 +151,7 @@ Hope you enjoy this computer graphics course!
 #### Depth-based Rendering
 #### View-Dependent Texture Mapping
 
-## [Low Discrepancy Sampling](Low%20Discrepancy%20Sampling.md)
+## [Low Discrepancy Sampling](/notes_github/Low%20Discrepancy%20Sampling.md)
 ### Sampling and Reconstruction Theory
 #### Ideal Sampling and Reconstruction
 #### Aliasing
@@ -165,7 +165,7 @@ Hope you enjoy this computer graphics course!
 #### Hammersley and Halton Sequences
 #### (0,2)-Sequences
 
-## [Denoising](Denoising.md)
+## [Denoising](/notes_github/Denoising.md)
 ### Image-Based Denoising
 #### Bilateral Filter
 #### NL-Means
@@ -173,7 +173,7 @@ Hope you enjoy this computer graphics course!
 ### [Robust Denoising using Feature and Color Information](https://www.cs.umd.edu/~zwicker/publications/RDFC-CGF13.pdf)
 ### Data Driven Denoising
 
-## [Inverse Rendering](Inverse%20Rendering.md)
+## [Inverse Rendering](/notes_github/Inverse%20Rendering.md)
 ### Photometric Stereo
 #### Automatic Differentiation
 ### Volume Optimization
@@ -181,7 +181,7 @@ Hope you enjoy this computer graphics course!
 ### Colorimetric Calibration
 ### Lighting Estimation
 
-## [Accelerating Data Structures](Accelerating%20Data%20Structures.md)
+## [Accelerating Data Structures](/notes_github/Accelerating%20Data%20Structures.md)
 ### Spatial Decomposition
 #### Uniform Grid
 #### KD-Trees
