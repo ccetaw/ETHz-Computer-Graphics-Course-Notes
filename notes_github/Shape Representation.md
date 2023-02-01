@@ -254,9 +254,12 @@ Polygonal Meshes are the most used representations in CG. It’s a boundary repr
 
 - A finite set $M$ of closed simple polygons $Q_{i}$ is a polygonal mesh.
 - The intersection of two polygons in $M$ is either empty, a vertex or and edge.
+
+
 $$
 M = <\underset{ \text{vertices} }{ V }, \underset{ \text{edges} }{ E }, \underset{ \text{faces} }{ F }>
 $$
+
 - Every edge belongs to at least one polygon.
 - Each $Q_{i}$ defines a face of the polygonal mesh
 
@@ -292,6 +295,7 @@ $$
 $$
 
 is *constant* for a a given surface topology, no matter which (manifold) mesh we choose
+
 – $v$ = number of vertices 
 – $e$ = number of edges 
 – $f$ = number of faces
