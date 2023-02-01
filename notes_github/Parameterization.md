@@ -175,7 +175,8 @@ $$\begin{align}
 \sum_{k=1}^{\sharp F} A_k \|J_k\|_F^2
 & = \sum_{k=1}^{\sharp F} A_k\|(D^k_x\mathbf{u} , D^k_y\mathbf{v} , D^k_x\mathbf{u} , D^k_y\mathbf{v})\|^2 \\
 &= \|A^{1/2}(\mathcal{D}_x\mathbf{u},\mathcal{D}_y\mathbf{u}, \mathcal{D}_x\mathbf{v}, \mathcal{D}_y\mathbf{v})\|^2_F \\
-&= \left\|\begin{pmatrix}A^{1/2}\mathcal{D}_x & 0 \\A^{1/2}\mathcal{D}_y & 0 \\ 
+&= \left\|\begin{pmatrix}A^{1/2}\mathcal{D}_x & 0 \\
+A^{1/2}\mathcal{D}_y & 0 \\ 
 0 & A^{1/2}\mathcal{D}_x \\ 
 0 & A^{1/2}\mathcal{D}_y \end{pmatrix}\begin{pmatrix}\mathbf{u}\\ 
 \mathbf{v}\end{pmatrix}\right\|^2 = \left\|\mathcal{A}\begin{pmatrix}\mathbf{u}\\ 
@@ -185,7 +186,8 @@ $$\begin{align}
 where $\mathcal{A}\in \mathbb{R}^{4\sharp F \times 2\sharp V}$, and $\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix} \in \mathbb{R}^{2\sharp V\times 1}$.
 Thus the problem becomes a least square problem:
 
-$$\underset{\mathbf{u},\mathbf{v}}{\min} \quad \left\|\mathcal{A}\begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix}\right\|^2 \Leftrightarrow \text{solve} \quad \mathcal{A}^\top\mathcal{A}\begin{pmatrix}\mathbf{u}\\ 
+$$\underset{\mathbf{u},\mathbf{v}}{\min} \quad \left\|\mathcal{A}\begin{pmatrix}\mathbf{u}\\ 
+\mathbf{v}\end{pmatrix}\right\|^2 \Leftrightarrow \text{solve} \quad \mathcal{A}^\top\mathcal{A}\begin{pmatrix}\mathbf{u}\\ 
 \mathbf{v}\end{pmatrix} = 0$$
 
 ==We have flattened $(\mathbf{u}, \mathbf{v})$ to $(\mathbf{u}; \mathbf{v})$ and made the problem become 1-dimensional.== 
@@ -203,7 +205,8 @@ where $L$ is the Laplacian operator. We can verify this is exactly equivalent to
 
 Now we add the boundary conditions to the optimization problem. The boundary conditions are similarly flattened: 
 
-$$\mathcal{C} \begin{pmatrix}\mathbf{u}\\ \mathbf{v}\end{pmatrix} = \mathbf{d}$$
+$$\mathcal{C} \begin{pmatrix}\mathbf{u}\\ 
+\mathbf{v}\end{pmatrix} = \mathbf{d}$$
 
 where $\mathcal{C}\in \mathbb{R}^{\sharp C\times 2\sharp V}$ and $\mathbf{d}\in\mathbb{R}^{2\sharp V\times 1}$, $\sharp C$ is the number of constraints.
 We reformulate the optimization in the Lagrangian multiplier framework: 
@@ -215,9 +218,9 @@ where $\mathbf{b}$ is added to extend to a more general form, and this is equiva
 
 $$\begin{pmatrix}\mathcal{A}^\top\mathcal{A}  & \mathcal{C}^\top \\
 \mathcal{C} & 0\end{pmatrix} \begin{pmatrix} \mathbf{u} \\ 
-\mathbf{v} 
-\\ \lambda \end{pmatrix} = \begin{pmatrix} \mathcal{A}^\top\mathbf{b} 
-\\ \mathbf{d} \end{pmatrix}$$
+\mathbf{v} \\
+\lambda \end{pmatrix} = \begin{pmatrix} \mathcal{A}^\top\mathbf{b} \\ 
+\mathbf{d} \end{pmatrix}$$
 
 #### LSCM
 The problem can be formulated into
