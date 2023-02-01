@@ -15,25 +15,33 @@ Previous work on image-based rendering (IBR) reveals a continuum of image-based 
 ## Rendering with No Geometry
 ### Plenoptic Modeling
 The original 7D plenoptic function is defined as ==the intensity of light rays passing through the camera center at every location== $(V_{x},V_{y},V_{z}$ at every possible angle $(\theta, \phi)$, for every wavelength $\lambda$, at every time $t$, i.e.,
+
 $$
 P_{7} = P(V_{x},V_{y},V_{z},\theta, \phi,\lambda,t)
 $$
+
 By dropping out two variables, time $t$ (therefore static environment) and light wavelength $\lambda$ (hence fixed lighting condition), we have the plenoptic modeling with the 5D complete plenoptic function,
+
 $$
 P_{5} = P(V_{x},V_{y},V_{z},\theta,\phi)
 $$
+
 The simplest plenoptic function is a 2D panorama when the viewpoint is fixed
+
 $$
 P_{2} = P(\theta,\phi)
 $$
+
 And a regular image(with a limited field of view) can be regarded as an incomplete plenoptic sample at a fixed viewpoint.
 
 ### Light Field Rendering
 ![](attachments/Image-Based%20Rendering-1.png#center%7CRepresentation%20of%20a%20light%20field)
 5D representation may be reduced to 4D in free space (regions free of occluders). This is a consequence of the fact that ==the radiance does not change along a line unless blocked.== 4D light fields may be interpreted as functions on the space of oriented lines
+
 $$
 P_{4} = P(u,v,s,t)
 $$
+
 #### Creation of Light Fiels
 ##### From Rendered Images
 For a virtual environment, a light slab is easily generated simply by rendering a 2D array of images. Each image represents a slice of the 4D light slab at a fixed uv value and is formed by placing the center of projection of the virtual camera at the sample location on the uv plane. The only issue is that the xy samples of each image must correspond exactly with the st samples. This is easily done by performing a sheared perspective projection ![Image-Based Rendering-3](attachments/Image-Based%20Rendering-3.png) similar to that used to generate a stereo pair of images. The picture below shows the resulting 4D light field, which can be visualized either as a uv array of st images or as an st array of uv images.
